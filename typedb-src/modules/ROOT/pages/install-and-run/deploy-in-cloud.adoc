@@ -1,4 +1,4 @@
-= Quickstart guide
+= Deploy in cloud
 :keywords: start, typedb, cloud, quickstart, tutorial, registration
 :longTailKeywords: getting started, get started with typedb cloud, typedb cloud tutorial, typedb cloud quickstart
 :pageTitle: Quickstart guide

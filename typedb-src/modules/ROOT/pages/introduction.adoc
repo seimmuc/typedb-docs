@@ -17,8 +17,8 @@ xref:fundamentals/types.adoc#_attribute_types[Attributes] and xref:fundamentals/
  ** uses declarative queries with its own query language: xref:typeql:ROOT:overview.adoc[TypeQL,window=_blank].
  We set the requirements for the result but do not specify how to achieve it.
 * Is a transactional (https://en.wikipedia.org/wiki/Online_transaction_processing[OLTP,window=_blank]) DBMS with
-xref:development/connect.adoc#_acid_guarantees[ACID] guarantees.
-* Has data separated by xref:development/connect.adoc#_databases[databases], each one with its own schema.
+xref:fundamentals.adoc#_acid_guarantees[ACID] guarantees.
+* Has data separated by xref:fundamentals.adoc#_databases[databases], each one with its own schema.
 
 ////
 Comparison of TypeDB with most common types of databases:
@@ -115,7 +115,7 @@ logic at the database level.
 
 1. First, use the xref:install-and-run/install.adoc[installation guide] to install TypeDB on the local machine.
 
-2. The TypeDB journey starts with our xref:quickstart.adoc[Quickstart guide].
+2. The TypeDB journey starts with our xref:quickstart/studio.adoc[Quickstart guide].
 +
 It goes through the step-by-step process of creating a new database, applying schema, loading sample data,
    and querying. The resulting environment is suitable for executing most examples in our documentation.
@@ -129,7 +129,7 @@ It goes through the step-by-step process of creating a new database, applying sc
     * xref:fundamentals/patterns.adoc[]
     * xref:fundamentals/inference.adoc[]
 
-4. xref:development/connect.adoc[Connect] page: Connect to TypeDB using databases, sessions, transactions, and ACID
+4. xref:fundamentals.adoc[Connect] page: Connect to TypeDB using databases, sessions, transactions, and ACID
    guarantees.
 
 5. xref:development/schema.adoc#_schema[Define schema] page: Find out how to define, undefine, and modify types and rules
