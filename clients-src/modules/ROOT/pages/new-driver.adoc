@@ -72,7 +72,7 @@ attempting to make a single gRPC call to TypeDB, and create a database.
 To instantiate a client we need to be able to establish a network connection to a TypeDB Core server or a
 TypeDB Enterprise cluster.
 
-This connection opens us basic features of xref:typedb::development/connect.adoc#_databases[database] management, user
+This connection opens us basic features of xref:typedb:ROOT:fundamentals.adoc#_databases[database] management, user
 management (TypeDB Enterprise & TypeDB Cloud only) and enables us to open a session.
 
 [#_grpc]

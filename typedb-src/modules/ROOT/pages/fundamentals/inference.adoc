@@ -61,7 +61,7 @@ This was the last page of the *Fundamentals* section.
 
 We recommend to continue exploring TypeDB by going through the *Development* section:
 
-* xref:development/connect.adoc[]
+* xref:fundamentals.adoc[]
 * xref:development/schema.adoc[]
 * xref:development/write.adoc[]
 * xref:development/read.adoc[]

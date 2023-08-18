@@ -25,9 +25,9 @@ To define or undefine anything in a TypeDB database schema we need:
     * See how to <<_undefine_types,undefine types>>;
     * See how to <<_undefine_rules,undefine rules>>;
     * See how to <<_modify_types, modify types>>
-2. xref:development/connect.adoc#_clients[Connect] to a TypeDB database with a xref:development/connect.adoc#_sessions[SCHEMA session].
+2. xref:fundamentals.adoc#_clients[Connect] to a TypeDB database with a xref:fundamentals.adoc#_sessions[SCHEMA session].
 3. Run a proper query type (xref:fundamentals/queries.adoc#_define_query[Define]/ xref:fundamentals/queries.adoc#_define_query[Undefine])
-   with a query string we built in a xref:development/connect.adoc#_transactions[WRITE transaction].
+   with a query string we built in a xref:fundamentals.adoc#_transactions[WRITE transaction].
 4. Commit the transaction to persist the changes.
 
 [#_define_types]
@@ -84,7 +84,7 @@ If we try to run this example in an empty database it will throw an error, becau
 types we mentioned as owned by the `file` entity type actually need to exist in the schema.
 
 They can be defined in the schema prior to our query (e.g., if we run this query on the database from the
-xref:quickstart.adoc[Quickstart] page), or we can define them in the same query. To do that, use the following query
+xref:quickstart/studio.adoc[Quickstart] page), or we can define them in the same query. To do that, use the following query
 instead:
 
 [,typeql]
