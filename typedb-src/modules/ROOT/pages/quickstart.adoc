@@ -43,7 +43,7 @@ It was specifically designed to connect to TypeDB servers (Core and Enterprise),
 
 To proceed, please install both TypeDB and TypeDB Studio:
 
-* xref:installation.adoc#_install[Install TypeDB]
+* xref:install-and-run/install.adoc#_install[Install TypeDB]
 * xref:clients:ROOT:studio.adoc#_download_install[Install TypeDB Studio]
 
 [IMPORTANT]
