@@ -113,7 +113,7 @@ logic at the database level.
 
 == Learn more
 
-1. First, use the xref:installation.adoc[installation guide] to install TypeDB on the local machine.
+1. First, use the xref:install-and-run/install.adoc[installation guide] to install TypeDB on the local machine.
 
 2. The TypeDB journey starts with our xref:quickstart.adoc[Quickstart guide].
 +
