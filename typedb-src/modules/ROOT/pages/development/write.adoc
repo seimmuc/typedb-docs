@@ -10,12 +10,12 @@ There are multiple query types that can modify data in a TypeDB database:
 * <<_delete_query>>
 * <<_update_query,Update>> (or match-delete-insert) query
 
-To send a writing data query we need to use xref:development/connect.adoc#_transactions[Write transaction].
+To send a writing data query we need to use xref:fundamentals.adoc#_transactions[Write transaction].
 
 [IMPORTANT]
 ====
 All examples provided on this page are designed for the IAM database schema and data.
-To set the IAM database follow the xref:quickstart.adoc[].
+To set the IAM database follow the xref:quickstart/studio.adoc[].
 ====
 
 [#_insert]

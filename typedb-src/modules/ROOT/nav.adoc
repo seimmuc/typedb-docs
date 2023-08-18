@@ -2,31 +2,48 @@
 
 * xref:overview.adoc[]
 * xref:introduction.adoc[]
-* xref:install-and-run/install.adoc[]
-* xref:quickstart.adoc[]
 
+* Install & Run
+** xref:install-and-run/install.adoc[]
+** xref:install-and-run/deploy-in-cloud.adoc[]
+
+* Quickstart guides
+** xref:quickstart/studio.adoc[]
+** xref:quickstart/console.adoc[]
+** xref:quickstart/drivers.adoc[]
+
+* xref:fundamentals.adoc[]
+
+////
 * Fundamentals
 ** xref:fundamentals/types.adoc[]
 ** xref:fundamentals/queries.adoc[]
 ** xref:fundamentals/patterns.adoc[]
 ** xref:fundamentals/inference.adoc[]
+////
 
 * Development
-** xref:development/connect.adoc[]
 ** xref:development/schema.adoc[]
 ** xref:development/write.adoc[]
 ** xref:development/read.adoc[]
 ** xref:development/infer.adoc[]
 ** xref:development/response.adoc[]
 ** xref:development/best.adoc[]
-** xref:development/api.adoc[]
+//** xref:development/api.adoc[]
 
-* Operations
-** xref:admin/configuration.adoc[]
-** xref:admin/export-import.adoc[]
-** xref:admin/update.adoc[]
-** xref:admin/ha.adoc[]
-** xref:admin/security.adoc[]
+* Cloud deployments
+** xref:cloud-deployments/account.adoc[]
+** xref:cloud-deployments/connect.adoc[]
+** xref:cloud-deployments/deploy.adoc[]
+** xref:cloud-deployments/organization.adoc[]
+** xref:cloud-deployments/projects.adoc[]
+
+* Self-hosted deployments
+** xref:self-hosted-deployments/configuration.adoc[]
+** xref:self-hosted-deployments/export-import.adoc[]
+** xref:self-hosted-deployments/update.adoc[]
+** xref:self-hosted-deployments/ha.adoc[]
+** xref:self-hosted-deployments/security.adoc[]
 
 * Tutorials
 ** xref:tutorials/iam-schema.adoc[]
