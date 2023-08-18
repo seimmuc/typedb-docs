@@ -1,4 +1,4 @@
-= Defining schema
+= Define schema
 :Summary: How to define a TypeDB database schema.
 :keywords: typedb, typeql, schema, define, undefine, types, rules
 :longTailKeywords: typedb schema, database schema, define a type, define a rule

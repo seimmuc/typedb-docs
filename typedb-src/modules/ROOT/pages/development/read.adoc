@@ -1,4 +1,4 @@
-= Reading data
+= Read data
 :Summary: Reading data from a TypeDB database.
 :keywords: typeql, query, get, match, pattern, read, retrieve
 :longTailKeywords: typeql get, match get, typeql read, typedb read

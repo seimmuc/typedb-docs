@@ -1,4 +1,4 @@
-= Writing data
+= Write data
 :Summary: Writing data in a TypeDB database.
 :keywords: typeql, typedb, query, insert, delete, update, write
 :longTailKeywords: typeql insert, typeql write data, typeql delete, typeql update

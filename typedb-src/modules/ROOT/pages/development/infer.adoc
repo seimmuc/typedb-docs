@@ -1,5 +1,5 @@
 [#_inferring_data]
-= Inferring data
+= Infer data
 :Summary: TypeDB inference queries.
 :keywords: typedb, query, inference, reasoning, rules, deduction, logic
 :longTailKeywords: typedb inference, typedb reasoning, reasoning engine
