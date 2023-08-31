@@ -1,4 +1,4 @@
-= Connect with Driver
+= Quickstart with API
 :keywords: getting started, typedb, typeql, tutorial, quickstart, overview
 :longTailKeywords: get started with typedb, typedb tutorial, typedb quickstart, learn typedb
 :pageTitle: Quickstart guide
