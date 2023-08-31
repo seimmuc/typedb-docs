@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:typedb-src/modules/ROOT/pages/fundamentals.adoc
-= Fundamentals
-========
 = Connecting to TypeDB
->>>>>>>> typedb-omni-docs:typedb-src/modules/ROOT/pages/fundamentals/connect.adoc
 :keywords: typedb, basics, connect, connection, session, database
 :longTailKeywords: basic concepts of typedb, typedb connection, typedb database, typedb session
 :pageTitle: Connecting
