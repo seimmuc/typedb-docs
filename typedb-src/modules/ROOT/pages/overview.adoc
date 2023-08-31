@@ -9,22 +9,22 @@ This is the TypeDB server documentation section. It has the following sections:
 * xref:introduction.adoc[] -- a brief description of TypeDB capabilities
 
 * *Install & Run*
-** xref:install-and-run/install.adoc[] -- Download & Install
-** xref:install-and-run/deploy-in-cloud.adoc[] -- Run in TypeDB Cloud
+** xref:install-and-run/install.adoc[] -- download distributive and install locally
+** xref:install-and-run/deploy-in-cloud.adoc[] -- run an instance in TypeDB Cloud (DBaaS)
 
 * *Quickstart guides*
 ** xref:quickstart/studio.adoc[] -- set up TypeDB Studio to connect to TypeDB
 ** xref:quickstart/console.adoc[] -- use TypeDB Console to connect to TypeDB
 ** xref:quickstart/drivers.adoc[] -- develop a new App to connect to TypeDB
 
-* xref:fundamentals.adoc[] -- TypeDB fundamental knowledge
+* *Fundamentals*
+//* xref:connect.adoc[] -- TypeDB fundamental knowledge
 
-////
+** xref:typedb::fundamentals/connect.adoc[] -- connection management, databases, and transactions
 ** xref:fundamentals/types.adoc[] -- essential information on types and inheritance
 ** xref:fundamentals/queries.adoc[] -- essential information on queries
 ** xref:fundamentals/patterns.adoc[] -- essential information on pattern matching
 ** xref:fundamentals/inference.adoc[] -- essential information on rules and reasoning (inference)
-////
 
 * *Development*
  ** xref:development/schema.adoc[] -- database schema definition
@@ -34,14 +34,14 @@ This is the TypeDB server documentation section. It has the following sections:
  ** xref:development/response.adoc[] -- query response formats
 // ** xref:development/api.adoc[] -- brief description of TypeDB Driver API and TypeDB Drivers
 // #todo Consider moving API to Clients section with tabs
- ** xref:development/best.adoc[] -- schema and query design tips
+ ** xref:development/best.adoc[] -- schema and query design tips, troubleshooting
 
 * *Cloud deployments*
-** xref:cloud-deployments/account.adoc[]
-** xref:cloud-deployments/connect.adoc[]
-** xref:cloud-deployments/deploy.adoc[]
-** xref:cloud-deployments/organization.adoc[]
-** xref:cloud-deployments/projects.adoc[]
+** xref:cloud-deployments/account.adoc[] -- register an account, log in/out, change password, and manage settings
+** xref:cloud-deployments/connect.adoc[] -- connect to a TypeDB Enterprise cluster/deployment
+** xref:cloud-deployments/deploy.adoc[] -- create, destroy, suspend, and resume deployments of TypeDB
+** xref:cloud-deployments/organization.adoc[] -- group users
+** xref:cloud-deployments/projects.adoc[] -- group deployments
 
 * *Self-hosted deployments*
  ** xref:self-hosted-deployments/configuration.adoc[] -- TypeDB server configuration parameters and host machine requirements
@@ -57,21 +57,25 @@ This is the TypeDB server documentation section. It has the following sections:
  into a TypeDB database
  ** xref:tutorials/new-driver-tutorial.adoc[New client] -- how to create a new client
 
+* xref:typedb:resources:releases.adoc[] -- released versions of TypeDB
+
 == Where to go from here?
 
 For a birds-eye view of the TypeDB features, see the xref:introduction.adoc[] page.
 
-For a more practical approach — xref:install-and-run/install.adoc[install] a TypeDB server and use our xref:quickstart/studio.adoc[] to
-set up a TypeDB environment to explore its capabilities further.
+For a more practical approach — xref:install-and-run/install.adoc[install] a TypeDB server locally or
+xref:typedb::install-and-run/deploy-in-cloud.adoc[deploy] an instance of TypeDB in TypeDB Cloud
+and use our xref:quickstart/studio.adoc[] to set up a TypeDB environment to explore its capabilities.
 
-Upon setting up a working TypeDB environment, we recommend to explore the following:
+Upon setting up a working TypeDB environment, we recommend to explore the following documentation subsections:
 
-* the *Fundamentals* section for essential knowledge about TypeDB,
-* the *Development* section for the in-detail documentation of the TypeDB development workflow,
-* the *Operations* section for the instructions for setting up a production environment,
-* or the *Tutorials* section for how-to guides and the xref:tutorials/iam-schema.adoc[].
+* *Fundamentals* -- essential knowledge about TypeDB;
+* *Development* -- documentation of the TypeDB development workflow;
+* *Cloud deployments* -- setting up a cloud (DBaaS) deployment;
+* *Self-hosted deployments* -- setting up a local server environment;
+* *Tutorials* -- how-to guides and the xref:tutorials/iam-schema.adoc[].
 
 There are separate documentation sections for:
 
-* xref:clients::clients.adoc[TypeDB Clients]
-* xref:typeql::overview.adoc[TypeQL]
+* xref:clients::clients.adoc[TypeDB Clients] -- TypeDB Studio, TypeDB Console, and TypeDB Drivers;
+* xref:typeql::overview.adoc[TypeQL] -- TypeDB's query language.

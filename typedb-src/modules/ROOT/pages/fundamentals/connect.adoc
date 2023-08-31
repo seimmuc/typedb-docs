@@ -1,4 +1,4 @@
-= Fundamentals
+= Connecting to TypeDB
 :keywords: typedb, basics, connect, connection, session, database
 :longTailKeywords: basic concepts of typedb, typedb connection, typedb database, typedb session
 :pageTitle: Connecting
