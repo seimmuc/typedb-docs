@@ -12,15 +12,12 @@
 ** xref:quickstart/console.adoc[]
 ** xref:quickstart/drivers.adoc[]
 
-* xref:fundamentals.adoc[]
-
-////
+//#todo update from TypeQL to TypeDB fundamentals
 * Fundamentals
 ** xref:fundamentals/types.adoc[]
 ** xref:fundamentals/queries.adoc[]
 ** xref:fundamentals/patterns.adoc[]
 ** xref:fundamentals/inference.adoc[]
-////
 
 * Development
 ** xref:development/schema.adoc[]
