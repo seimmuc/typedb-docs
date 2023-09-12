@@ -2,140 +2,291 @@
 :keywords: typedb, database, documentation, introduction, overview
 :longTailKeywords: typedb introduction, typedb overview, learn typedb, learn typeql, typedb schema, typedb data model
 :pageTitle: TypeDB introduction
-:summary: A birds-eye view of TypeDB.
+:summary: An intriduction for TypeDB's documentation
 
-== Summary
+TypeDB is a strongly typed database management system (DBMS) with an intelligent reasoning engine
+to infer new data and a declarative query language based on composable patterns to find it easily.
 
-TypeDB:
+== Short summary
 
-* Is a strongly typed database that is unique in many ways:
- ** has its own special xref:fundamentals/types.adoc[static type system],
- ** uses xref:fundamentals/types.adoc#_root[Entity-Relationship model], extended with
-xref:fundamentals/types.adoc#_attribute_types[Attributes] and xref:fundamentals/inference.adoc#_rules[Rules],
-// - #todo add link to the types article
- ** supports subtyping and inheritance like OOP languages,
- ** uses declarative queries with its own query language: xref:typeql:ROOT:overview.adoc[TypeQL,window=_blank].
- We set the requirements for the result but do not specify how to achieve it.
-* Is a transactional (https://en.wikipedia.org/wiki/Online_transaction_processing[OLTP,window=_blank]) DBMS with
-xref:fundamentals.adoc#_acid_guarantees[ACID] guarantees.
-* Has data separated by xref:fundamentals.adoc#_databases[databases], each one with its own schema.
+TypeDB is a transactional (OLTP) DBMS with xref:development/acid-guarantees.adoc[] that is strongly-typed and
+has the following features:
 
-////
-Comparison of TypeDB with most common types of databases:
+* TypeDB uses an enhanced Entity-Relationship model, extended with Attributes as first-class citizens;
+* TypeDB has its own special static type system, supporting user-defined types with subtyping and inheritance,
+  like OOP languages;
+* TypeDB can use rule-based logic embedded into a database schema to infer new data from patterns found in existing data;
+* TypeDB uses its own declarative query language -- xref:typeql::overview.adoc[TypeQL].
 
-* xref:../../12-comparisons/00-sql-and-typeql.adoc[SQL]
-* xref:../../12-comparisons/01-semantic-web-and-typedb.adoc[Semantic web]
-* xref:../../12-comparisons/02-graph-databases-and-typedb.adoc[Graph]
-////
+The core of any TypeDB database is its schema.
+A schema is a conceptual (logical) data model rather than a physical one and consists of types and rules.
 
-//== Thinking in TypeQL and TypeDB
+Using xref:typeql::overview.adoc[TypeQL], we define a schema to model business domains true to life.
 
-// #todo Change the link to TypeQL -
+We build data queries using declarative and composable patterns, written in TypeQL, and types, defined in schema.
 
-The core of any TypeDB database is the representation of our business domain: the xref:development/schema.adoc#_schema[schema].
-A schema is the blueprint of a TypeDB database. Using TypeQL, we define a schema to model a domain
-true to nature:
+== Comparison with other databases
+//#todo add direct comparison materials links
 
-* Types are defined to add context and constraints to data using strong typing with inheritance. All user-defined
-  types in a schema are subtypes of other user-defined types or one of the following built-in root types:
-** Entities. Representing self-sufficient objects.
-** Relations. Representing n-ary relationships.
-** Attributes. Representing properties with a value: numeric, text string, boolean, or date&time.
-* Rules are defined to add a logical deduction to the schema. Any read queries with the inference option enabled can
-  benefit from new attribute ownerships or relations that are deduced from data patterns. Those inferred
-  concepts are transaction bound and are not persisted in a database.
+TypeDB looks beyond relational and NoSQL databases by introducing a strong type system and extending it with inference
+and pattern matching for simple, yet powerful querying.
 
-// ** Context helps us to correctly model, classify and query our data the most logical way.
-// ** Constraints are used for query validation and limiting the scope of queries.
+Some examples of what TypeDB is not:
 
-== TypeDB description
+* It’s not an SQL database, but it uses an enhanced Entity-Relationship model that is extended by attributes as
+  first-class citizens;
+* It’s not a graph database, but it utilizes the power of hypergraphs without asking developers to understand the
+  implementation details;
+* It’s not an object-oriented database, but it uses types with subtyping and inheritance to model data.
 
-TypeDB is a new kind of DBMS:
+//#todo Consider adding some of the content from the website
 
-* not an SQL database, but uses an enhanced Entity-Relationship model, further extended by attributes as first-class
-  citizens;
-* not a graph database, but utilizes the power of https://en.wikipedia.org/wiki/Hypergraph[hypergraphs,window=_blank]
-  without the need for developers to understand how it works to use it.
+For more information on comparison with other types of databases, see the
+https://typedb.com/introduction[Introduction to TypeDB] page of our website.
 
-[NOTE]
+== Top features
+
+=== Strong type system
+
+TypeDB brings the benefits of strong typing in modern programming languages to the database, allowing developers
+to use abstraction, inheritance and polymorphism when modeling and querying data – and finally removing the mismatch
+between logical and physical data models.
+
+A strict hierarchy of types, expandable by adding new types. Every new type should be a subtype of exactly one
+supertype -- either a built-in type or another user-defined type.
+
+Any TypeDB database has the following built-in types:
+
+* `entity` -- A root type for all entities. An entity represents a self-sufficient object.
+* `relation` -- A root type for all relations. A relation represents an n-ary relationship between other types.
+* `attribute` -- A root type for all attributes. An attribute represents a property with a value.
+
+An accurate type hierarchy can add context and constraints to data using strong typing and inheritance.
+
+.See type hierarchy example schema
+[%collapsible]
 ====
-Entity, Relation, and Attribute correspond to the components of an Entity-Relation-Attribute model, an
-extension of the well-known https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model[ER model,window=_blank],
-in which attributes (properties) are also treated as first-class citizens.
+[,typeql]
+----
+define
+
+user sub entity,
+    owns username,
+    plays group-membership:member;
+
+person sub user,
+    owns full-name,
+    owns email,
+    owns password-hash;
+
+bot sub user,
+    owns security-token;
+
+user-group sub entity,
+    owns name,
+    plays group-membership:group;
+
+group-membership sub relation,
+    owns date-added;
+    relates group,
+    relates member;
+
+username sub attribute, value string;
+full-name sub attribute, value string;
+name sub attribute, value string;
+email sub attribute, value string;
+password-hash sub attribute, value string;
+security-token sub attribute, value string;
+date-added sub attribute, value datetime;
+----
+
+See TypeDB Studio visualization of that schema below:
+
+image::intro-hierarchy-schema.png[]
 ====
 
-TypeDB guarantees data integrity and safety while enabling data-level inferences within the database.
-A strong type system with subtyping and inheritance helps us break down complex problems into
-meaningful and logical data models. TypeDB uses its own declarative query language, TypeQL, that gives powerful
-abstraction over the implementation of storage to enable us to use complex data patterns and the reasoning engine.
+For more information on how strong our type system is, see the xref:typeql::fundamentals.adoc#_types[Types] section on
+xref:typeql::fundamentals.adoc[Fundamentals page] in xref:typeql::overview.adoc[TypeQL documentation].
 
-With TypeQL, we describe data that we need by xref:typedb::fundamentals/patterns.adoc#_patterns_overview[patterns]
-consisting of constraints. TypeDB will use those patterns to retrieve all data that satisfies all the constraints
-in the most efficient way. We don't have to think about query optimization, limitations of data storage
-implementation, etc.
+=== Rule inference
 
-By combining TypeQL and TypeDB, we can close the gap between the language of our domain and the database. Queries
-written in TypeQL are easily readable. Carefully designed database xref:development/schema.adoc#_schema[schema] lets us
-use the terminology of the business domain, making our queries sound familiar to subject-matter experts. This new
-paradigm gives us a higher level of flexibility and expressivity to simplify our work and tackle domains that
-seemed impossibly complex before.
+Rules represent logic embedded in a schema.
+Inference is a logical deduction based on a set of rules defined in a schema.
 
-TypeQL and TypeDB allow us to build a data model with entity, relation, and attribute types. Inheritance allows us to
-define a hierarchy of subtypes and reduce complexity, while rules and relations with type constraints on their
-role-players further enhance our schema. These abstractions provide a higher-level framework to build intuitive
-and understandable models.
+When a READ type transactions are running with the _inference_ option enabled,
+TypeDB can deduce new (virtual) attribute ownerships and relations if they influence the query results.
 
-// We can use the power of https://en.wikipedia.org/wiki/Hypergraph[hypergraphs] without the need to understand graphs!
+Virtual (inferred) data is not persisted and will be lost upon closing the transaction.
 
-In other databases, we implement relations with a join table (SQL) or an edge between two vertices
-(graph databases). TypeDB relations generalize both: they flexibly relate one, two, or any number of roles. And each
-role can be played by any types defined as role-players for this particular role in the schema.
+.See rule examples
+[%collapsible]
+====
+*Inferring new data*
 
-////
-In other databases, relations may be implemented with a join table
-(xref:../../12-comparisons/00-sql-and-typeql.adoc[SQL]), or an edge between two vertices
-(xref:../../12-comparisons/02-graph-databases-and-typedb.adoc[graph] databases). TypeDB relations generalize both: they
-flexibly relate one, two, or any number of data instances at the same time.
-////
+[,typeql]
+----
+define
 
-This expanded idea of a relation is more powerful than either SQL or graph relations. However, we can further
-improve this idea: if we allow relations not just to specify which instances relate to each other but also _how_
-they relate by adding context. This has been implemented in the form of a role.
+rule everyone-is-a-dude:
+    when {
+        $p isa person;
+    } then {
+        $p has full-name "Dude";
+    };
+----
 
-Any relation type specifies one or many roles connected by this relation. Any type in a schema can play roles
-that were explicitly defined in the type definition. Roles have labels that provide the context and type
-constraints for roles to enforce this context.
+The above example will add a `full-name` attribute with value `Dude` to every existing person.
 
-Finally, we can use the reasoning engine to infer new data based on the patterns found in the database. To do
-that, we define rules in the database schema. Rules can dramatically shorten complex queries (e.g., transitivity of
-relations), perform xref:development/infer.adoc#_explain_query[explainable] knowledge discovery, and implement business
-logic at the database level.
+*Transitive relations*
+
+Let's add an ability for user-groups to be members of other user-groups to the schema we used above.
+
+[,typeql]
+----
+define
+
+user-group plays group-membership:member;
+----
+
+Now, we can add a new rule to enable group membership being transitive, so we can include Group A in Group B,
+so that every member of Group A will become a member of Group B through transitivity of membership:
+
+`person` -> Group A -> Group B.
+
+[,typeql]
+----
+define
+
+rule transitive-group-membership:
+   when {
+      (group: $g1, member: $g2) isa group-membership;
+      (group: $g2, member: $p) isa group-membership;
+   } then {
+      (group: $g1, member: $p) isa group-membership;
+   };
+----
+
+The above rule works for any number of groups.
+
+For example, if we insert data of group-membership according to the following:
+
+`person` -> Group A -> Group B -> Group C -> Group D -> Group E
+
+where `->` -- means a `group-membership` relation with an entity on the left from the -> playing the role of `member`
+and entity on the right playing the role of `group`. Then the transitivity, implemented by
+the `transitive-group-memmbership` rule will make `person` a member of all groups from A to E.
+====
+
+For more information on rule inference, see the xref:typeql::schema/define-rules.adoc[] page
+in xref:typeql::overview.adoc[TypeQL documentation].
+
+=== Truly declarative and composable data queries
+
+TypeQL is designed specifically for expressing what data looks like, not how to get it.
+There are no joins, no unions and no need for ordered query logic.
+
+Data queries based on powerful yet simple patterns, using types, defined in a schema of a database.
+Those patterns are easily readable and composable.
+We can add new statements to any place of a pattern, even combine multiple patterns,
+to retrieve all matching data in just one query.
+
+.See data queries examples
+[%collapsible]
+====
+
+The following insert query creates two instances of the `person` type, two groups and assigning a membership in one
+of the groups for one of the users:
+
+[,typeql]
+----
+insert
+$p1 isa person,
+    has full-name "Bob",
+    has name "bob90",
+    has email "bob@vaticle.com";
+
+$p2 isa person,
+    has full-name "Alex",
+    has name "al-capucino";
+
+$g1 isa user-group,
+    has name "admins";
+
+$g2 isa user-group,
+    has name "users";
+
+$m (member: $p1, group: $g1) isa group-membership;
+----
+
+The following query retrieves data of all instances of `user` type (which is a supertype for the `person` type) that
+have ownership over any attribute.
+It returns all matched instances of `user` type or its subtypes and the attributes they own.
+
+[,typeql]
+----
+match
+$u isa user, has $a;
+----
+
+The following query executes `match` clause first and then `insert` clause using matched data.
+The `match` clause matches all instances of `person` type and all instances of `group` type, owning an attribute of
+type `name` and value `users` such as there is no `group-membership` relation between them.
+Then the `insert` clause inserts a `group-membership` relation between all matched instances of `person`
+and all matched instances of `group`:
+
+[,typeql]
+----
+match
+$p isa person;
+$g isa user-group,
+    has name "users";
+not { ($p, $g) isa group-membership; };
+insert
+(member:$p, group:$g) isa group-membership;
+----
+====
+
+== TypeDB editions comparison
+
+There are three editions of TypeDB:
+
+* <<_typedb_cloud,TypeDB Cloud>>
+* <<_typedb_enterprise,TypeDB Enterprise>>
+* <<_typedb_core,TypeDB Core>>
+
+For more information on the availability of features in all editions,
+see the https://typedb.com/deploy[Deploy] page of our website.
+
+[#_typedb_cloud]
+=== TypeDB Cloud
+
+TypeDB Cloud is our DBaaS solution.
+
+TypeDB Cloud is built on Kubernetes and makes it easy to run and manage TypeDB deployments across multiple teams
+and projects in AWS, Azure, and GCP.
+
+//Your TypeDB databases run in clusters managed by us and deployed in cloud powered by https://aws.amazon.com/[AWS] or https://cloud.google.com/[GCP].
+
+[#_typedb_enterprise]
+=== TypeDB Enterprise
+
+TypeDB Enterprise extends TypeDB Core with advanced security and high-availability features for running in production,
+including active-active clustering and authentication with roles.
+
+Self-hosted, self-managed on-premise TypeDB clusters with our technical support.
+
+[#_typedb_core]
+=== TypeDB Core
+
+TypeDB Core is 100% Open source with https://github.com/vaticle/typedb/blob/development/LICENSE[AGPL-3.0 license],
+provides developers with everything they need to get started and is available via a Docker container as well as
+Windows, Linux and macOS builds.
 
 == Learn more
 
-1. First, use the xref:install-and-run/install.adoc[installation guide] to install TypeDB on the local machine.
-
-2. The TypeDB journey starts with our xref:quickstart/studio.adoc[Quickstart guide].
-+
-It goes through the step-by-step process of creating a new database, applying schema, loading sample data,
-   and querying. The resulting environment is suitable for executing most examples in our documentation.
-   On top of that it familiarizes users with TypeDB Studio — IDE, specifically designed for TypeDB
-   database management and development.
-
-3. Fundamentals -- essential knowledge of how TypeDB works:
-
-    * xref:fundamentals/types.adoc[]
-    * xref:fundamentals/queries.adoc[]
-    * xref:fundamentals/patterns.adoc[]
-    * xref:fundamentals/inference.adoc[]
-
-4. xref:fundamentals.adoc[Connect] page: Connect to TypeDB using databases, sessions, transactions, and ACID
-   guarantees.
-
-5. xref:development/schema.adoc#_schema[Define schema] page: Find out how to define, undefine, and modify types and rules
-   in a TypeDB database.
-
-6. xref:typedb::development/write.adoc[Writing data] and xref:typedb::development/read.adoc[Reading data] pages: How to perform Insert,
-   Delete, Update, and Get queries.
-
-7. xref:development/response.adoc[Response interpretation] page: How to use responses from TypeDB.
+. Install TypeDB locally with the xref:install-and-run.adoc[Installation guide] or deploy it in the
+  https://cloud.typedb.com/[TypeDB Cloud].
+. Create a database and try some queries with xref:quickstart-guide.adoc[Quickstart guide].
+. Learn only essentials about TypeDB with xref:fundamentals.adoc[] page.
+. Learn more about connecting to a database, querying, and troubleshooting in our *Developing with TypeDB* subsection.
+. Prepare a production environment with *Managing TypeDB* subsection.

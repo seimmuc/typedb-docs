@@ -45,10 +45,10 @@ Password: `password`
 ====
 // end::default-credentials[]
 
-To connect to a TypeDB Cloud deployment we can use any TypeDB Client: see the xref:deployments/connect.adoc[] page
+To connect to a TypeDB Cloud deployment, we can use any TypeDB Client: see the xref:deployments/connect.adoc[] page
 for more options.
 
-For example, to connect via TypeDB Console:
+To connect via TypeDB Console:
 
 // tag::console-connect[]
 [,bash]
@@ -66,14 +66,11 @@ For example, `deployment-78678ca6-afda-4792-b5b8-0cb6b540d8ee-0.deployment-78678
 * `true` -- is the TLS encryption setting. It's true (enabled) by default.
 * `<path_to_ca>` -- the path to the CA certificate.
 
-.See example
-[%collapsible]
-====
+For example:
 [,bash]
 ----
 typedb console --cluster=deployment-78678ca6-afda-4792-b5b8-0cb6b540d8ee-0.deployment-78678ca6-afda-4792-b5b8-0cb6b540d8ee.cloud.typedb.com:1729  --username=admin --password=password --tls-enabled=true --tls-root-ca=./typedb-cloud-root-ca.pem
 ----
-====
 
 As a result, we get a welcome message from TypeDB Console, and if the connection is successful,
 it's followed by a command line prompt.

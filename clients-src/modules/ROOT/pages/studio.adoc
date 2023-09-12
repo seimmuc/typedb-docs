@@ -64,6 +64,8 @@ bash brew tap vaticle/tap brew install --cask vaticle/tap/typedb-studio
 ----
 ====
 
+//#todo add section on starting Studio
+
 == Prepare for work
 
 Right after starting TypeDB Studio we can see its main window as it is shown below.
@@ -240,8 +242,8 @@ with query to run.
 +
 image::studio/project-schema-pasted.png[Query text, width = 70%, link=self]
 
-. Choose the correct xref:typedb:ROOT:fundamentals.adoc#_sessions[session,window=_blank] (`schema`/`data`) type and
-  xref:typedb:ROOT:fundamentals.adoc#_transactions[transaction,window=_blank] (`read`/`write`) type to run the query
+. Choose the correct xref:typedb:ROOT:development/connect.adoc#_sessions[session,window=_blank] (`schema`/`data`) type and
+  xref:typedb:ROOT:development/connect.adoc#_transactions[transaction,window=_blank] (`read`/`write`) type to run the query
   by clicking on those options on the *Toolbar* switches.
 . Run the query by clicking on the btn:[Run Query] (▶) button. +
 *Run* panel will be expanded on the bottom of the query to show the results of the query execution attempt.
@@ -297,10 +299,10 @@ image::studio/studio-transaction-controls.png[Transaction controls, link=self]
 
 From left to right (numbered respectively to the screenshot numbers):
 
-. xref:typedb:ROOT:fundamentals.adoc#_sessions[Session] type switch:
+. xref:typedb:ROOT:development/connect.adoc#_sessions[Session] type switch:
  ** `schema` -- to use schema session type
  ** `data` -- to use data session type
-. xref:typedb:ROOT:fundamentals.adoc#_transactions[Transaction] type switch:
+. xref:typedb:ROOT:development/connect.adoc#_transactions[Transaction] type switch:
  ** `write` -- to use write transaction
  ** `read` -- to use read transaction
 . btn:[snapshot] button -- enables snapshot feature that encapsulates transaction in a snapshot of a database's data
@@ -476,7 +478,7 @@ the transaction with the green tick at the top of the Studio window.
 In some cases the btn:[Delete] option and button can be disabled. That means there are some conditions that prevent us
 from deleting this type.
 
-For example, we can't xref:typedb::development/schema.adoc#_undefine_subtype[delete a type that has a subtype].
+For example, we can't xref:typedb::development/define-schema.adoc#_undefine_subtype[delete a type that has a subtype].
 ====
 
 == Settings
@@ -509,7 +511,7 @@ Default value: *On*.
 
 | 2.18.0 to 2.21.1
 | 1
-| 2.18.0 to 2.21.1
+| 2.18.0 to 2.22.0
 | 2.18.0 to 2.21.1
 
 | 2.14.1 to 2.17.0

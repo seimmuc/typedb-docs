@@ -1,4 +1,4 @@
-= Download & Install
+= Install & Run
 :keywords: setup, getting started, typedb, download, install, server, linux, mac, windows, docker
 :longTailKeywords: typedb on linux, typedb on mac, typedb on windows, start typedb server
 :pageTitle: Installation
@@ -6,10 +6,23 @@
 :tabs-sync-option:
 :experimental:
 
+== TypeDB Cloud
+
+Login into https://cloud.typedb.com/[TypeDB Cloud] and add a new cloud deployment.
+
+== TypeDB Enterprise
+
+Use the following guides to install and deploy TypeDB Enterprise:
+
+* xref:typedb::install-and-run/enterprise/install-and-run.adoc[]
+* xref:typedb::install-and-run/enterprise/kubernetes.adoc[]
+
+== TypeDB Core
+
 [#_install]
 
 [#_package]
-== Install with a package manager
+=== Install with a package manager
 
 [tabs]
 ====
@@ -39,7 +52,7 @@ include::partial$macos.adoc[tag=install-homebrew]
 ====
 
 [#_manual]
-== Download and install manually
+=== Download and install manually
 
 [tabs]
 ====
@@ -68,7 +81,8 @@ include::partial$macos.adoc[tag=install-manual]
 --
 ====
 
-== Start the server
+[#_start_the_server]
+=== Start the server
 
 [tabs]
 ====
@@ -97,7 +111,7 @@ include::partial$macos.adoc[tag=start]
 --
 ====
 
-== Stop the server
+=== Stop the server
 
 [tabs]
 ====
@@ -126,8 +140,9 @@ include::partial$macos.adoc[tag=stop]
 --
 ====
 
-== After installation
+=== After installation
 
+<<<<<<<< HEAD:typedb-src/modules/ROOT/pages/install-and-run/install.adoc
 After the very first installation of TypeDB we recommend using our xref:quickstart/studio.adoc[Quickstart guide]
 to set up a database and try different types of queries with xref:clients:ROOT:studio.adoc[TypeDB Studio].
 
@@ -135,3 +150,13 @@ Alternatively, any other xref:clients:ROOT:clients.adoc[TypeDB Client] can be us
 
 To learn more about TypeDB check the Fundamentals section, starting from the
 xref:fundamentals/types.adoc[Type system] page.
+========
+After the first installation of TypeDB, we recommend using our xref:quickstart-guide.adoc[Quickstart guide]
+to set up a database and to try different types of queries.
+
+Alternatively, any other xref:clients:ROOT:clients.adoc[TypeDB Client] can be used to connect to a TypeDB server.
+
+To find out only essential information about TypeDB, check the xref:typedb::fundamentals.adoc[] page.
+
+To learn more about connecting to TypeDB and querying it, see the *Developing with TypeDB* section.
+>>>>>>>> typedb-omni-docs:typedb-src/modules/ROOT/pages/install-and-run.adoc

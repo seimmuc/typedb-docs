@@ -91,7 +91,7 @@ For more information on the Define query, see the
 xref:typeql::schema/define-types.adoc#_define_query[Define types,window=_blank] and
 xref:typeql::schema/define-rules.adoc[window=_blank] pages.
 
-For examples of how to perform a Define query, see the xref:typedb::development/schema.adoc[] page.
+For examples of how to perform a Define query, see the xref:typedb::development/define-schema.adoc[] page.
 
 [#_define_clause]
 === Define clause
@@ -123,7 +123,7 @@ For more information on the Undefine query, see the
 xref:typeql::schema/modify.adoc#_undefine_a_type[Modify existing schema,window=_blank] page.
 
 For examples of how to perform an Undefine query, see the
-xref:typedb::development/schema.adoc#_undefine[Defining schema] page.
+xref:typedb::development/define-schema.adoc#_undefine[Defining schema] page.
 
 [#_undefine_clause]
 === Undefine clause
@@ -159,7 +159,7 @@ The old naming can be seen in some Driver API methods for backward compatibility
 For more information on the Get query, see the xref:typeql::data/get.adoc[window=_blank] page in the
 xref:typeql::overview.adoc[TypeQL,window=_blank] documentation.
 
-For examples of how to perform a Get query, see the xref:typedb::development/read.adoc[] page.
+For examples of how to perform a Get query, see the xref:typedb::development/read-data.adoc[] page.
 
 [#_match]
 === Match clause
@@ -273,7 +273,7 @@ If there are no matches for a `match` clause in an `insert` query, then there wi
 ====
 
 The `insert` clause can have a pattern with multiple statements to insert in one query. But it can't insert types
-(use xref:typedb::development/schema.adoc#_define_types[define] to insert new types) and can't have the following:
+(use xref:typedb::development/define-schema.adoc#_define_types[define] to insert new types) and can't have the following:
 
 - Conjunction
 - Disjunction
@@ -283,8 +283,8 @@ The `insert` clause can have a pattern with multiple statements to insert in one
 For more information on the Insert query, see the xref:typeql::data/insert.adoc[window=_blank] page in the
 xref:typeql::overview.adoc[TypeQL,window=_blank] documentation.
 
-For examples of how to perform an Insert query, see the xref:typedb::development/write.adoc#_insert[Insert query] section of the
-xref:typedb::development/write.adoc[] page.
+For examples of how to perform an Insert query, see the xref:typedb::development/write-data.adoc#_insert[Insert query] section of the
+xref:typedb::development/write-data.adoc[] page.
 
 === Match clause
 
@@ -354,7 +354,7 @@ If there are no matches for a `match` clause in a `delete` query, then there wil
 ====
 
 The `delete` clause can have a pattern with multiple statements to delete in one query. But it can't delete types (use
-xref:typedb::development/schema.adoc#_undefine_types[undefine] to delete types) and can't have the following:
+xref:typedb::development/define-schema.adoc#_undefine_types[undefine] to delete types) and can't have the following:
 
 - Conjunction
 - Disjunction
@@ -364,8 +364,8 @@ xref:typedb::development/schema.adoc#_undefine_types[undefine] to delete types) 
 For more information on the Delete query, see the xref:typeql::data/delete.adoc[Delete,window=_blank] page in the
 xref:typeql::overview.adoc[TypeQL,window=_blank] documentation.
 
-For examples of how to perform a Delete query, see the xref:typedb::development/write.adoc#_delete_query[Delete query] section of the
-xref:typedb::development/write.adoc[] page.
+For examples of how to perform a Delete query, see the xref:typedb::development/write-data.adoc#_delete_query[Delete query] section of the
+xref:typedb::development/write-data.adoc[] page.
 
 === Match clause
 
@@ -462,8 +462,8 @@ value of `deleted` to the same entity.
 ====
 
 For more examples of how to perform an Update query, see the
-xref:typedb::development/write.adoc#_update_query[Update query]
-section of the xref:typedb::development/write.adoc[] page.
+xref:typedb::development/write-data.adoc#_update_query[Update query]
+section of the xref:typedb::development/write-data.adoc[] page.
 
 === Match clause
 

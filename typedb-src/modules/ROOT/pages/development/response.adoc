@@ -14,7 +14,7 @@ see the table below for mapping of response format to a type of query that has b
 | *#* | *Query type* | *Response format*
 
 | 1
-| xref:typedb::development/read.adoc#_get[Get query]
+| xref:typedb::development/read-data.adoc#_get[Get query]
 | Stream/Iterator of *ConceptMap*
 
 | 2
@@ -31,23 +31,23 @@ xref:typeql::data/get.adoc#_aggregation[aggregation,window=_blank]
 | Stream/Iterator of *NumericGroup*
 
 | 5
-| xref:typedb::development/write.adoc#_insert[Insert query]
+| xref:typedb::development/write-data.adoc#_insert[Insert query]
 | Stream/Iterator of *ConceptMap*
 
 | 6
-| xref:typedb::development/write.adoc#_delete_query[Delete query]
+| xref:typedb::development/write-data.adoc#_delete_query[Delete query]
 | *Future* (of empty response)
 
 | 7
-| xref:typedb::development/write.adoc#_update_query[Update query]
+| xref:typedb::development/write-data.adoc#_update_query[Update query]
 | Stream/Iterator of *ConceptMap*
 
 | 8
-| xref:typedb::development/schema.adoc#_define_types[Define]
+| xref:typedb::development/define-schema.adoc#_define_types[Define]
 | *Future* (of empty response)
 
 | 9
-| xref:typedb::development/schema.adoc#_undefine[Undefine]
+| xref:typedb::development/define-schema.adoc#_undefine[Undefine]
 | *Future* (of empty response)
 
 | 10
@@ -65,7 +65,7 @@ section below.
 
 === Get query
 
-The ordinary xref:typedb::development/read.adoc#_get[Get query] (without
+The ordinary xref:typedb::development/read-data.adoc#_get[Get query] (without
 xref:typedb:ROOT:fundamentals/queries.adoc#_modifiers[aggregation] or
 xref:typedb:ROOT:fundamentals/queries.adoc#_modifiers[grouping]) returns a stream/iterator of a ConceptMap objects.
 

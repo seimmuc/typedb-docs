@@ -1,0 +1,63 @@
+= Fundamentals
+:keywords: typedb, basics, connect, connection, session, database
+:longTailKeywords: basic concepts of typedb, typedb connection, typedb database, typedb session
+:pageTitle: Connecting
+:summary: Brief description of connection to TypeDB.
+:tabs-sync-option:
+
+This page consists of compressed essential knowledge about TypeDB and links to further sections of documentation with
+more detail on the topics.
+
+We chose this way to communicate basic concepts and terminology, required for learning TypeDB in the most concise form.
+
+== TypeDB server and client
+
+//What is TypeDB
+TypeDB is a DBMS software.
+
+//TypeDB editions
+There are three editions of the software: Cloud, Enterprise, Core.
+For more information, see https://typedb.com/deploy[Deploy] page of our website.
+
+//client-server architecture
+//client role
+TypeDB uses TypeDB protocol, based on gRPC, to receive queries.
+Any software implementing TypeDB protocol to communicate with TypeDB server or cluster called TypeDB Client.
+TypeDB Clients implement TypeDB protocol over gRPC, validate queries, and provide Driver API methods to
+manage connection, send queries, and process answers.
+
+//client types
+As a sub-category of TypeDB Clients, there are TypeDB Drivers -- language-specific libraries that implement TypeDB
+protocol and can be used in an application with TypeDB Driver API.
+
+== Database
+
+//database data separation
+All data stored in databases. A database has name, schema and data.
+
+//storage
+//Data stored in underlying SpeedDB as key-values.
+
+//schema
+A schema of a database contains a full hierarchy of types and a full set of rules that can be used in this database.
+
+//types
+A type
+
+//rules
+A rule represents logic embedded in a schema.
+Rules are used by reasoning engine to infer new data, based on patterns, found in existing data.
+
+//Instance of a type
+//Concept
+//Value
+
+== Connection
+
+//client
+//session
+//transaction
+
+== Query
+
+

@@ -97,16 +97,14 @@ ln -s /opt/typedb/typedb-all-linux-{latest-version}/typedb /usr/local/bin/typedb
 
 // tag::start[]
 
-Run the following command in a terminal:
+Run the following command in a terminal to start a TypeDB server:
 
 [,shell]
 ----
 typedb server
 ----
 
-TypeDB will run in the foreground. If the terminal running TypeDB is closed, TypeDB will be shut down. We
-recommend opening a new terminal to run TypeDB Console.
-
+TypeDB will run in the foreground. If the terminal running TypeDB is closed, TypeDB will be shut down.
 // end::start[]
 
 // tag::stop[]

@@ -1,0 +1,66 @@
+= User management
+:keywords: typedb, security, auth, authentication, encryption, vulnerability
+:longTailKeywords: TypeDB security, user authentication, data encryption
+:pageTitle: User management
+:summary: TypeDB high availability guarantees and solution.
+
+[NOTE]
+====
+User management features are a part of TypeDB Enterprise & TypeDB Cloud.
+====
+
+Use xref:clients:ROOT:console.adoc#_database_management_commands[TypeDB Console] or xref:development/api.adoc[TypeDB Driver API]
+(xref:clients:ROOT:java/java-api-ref.adoc#_users[Java],
+xref:clients:ROOT:python/python-api-ref.adoc#_users[Python],
+xref:clients:ROOT:node-js/node-js-api-ref.adoc#_users[Node.js])
+to manage users.
+To connect to TypeDB with TypeDB Console provide a username and password (when prompted):
+
+[,bash]
+----
+typedb console --cluster=<address> --username=<username> --password
+----
+
+After issuing this command we will be prompted to provide a password.
+
+[IMPORTANT]
+====
+Only the administrator account (username `admin`) can perform user management actions.
+====
+
+Use the following TypeDB Console commands to manage users.
+
+Retrieve a list of all users:
+
+[,bash]
+----
+user list
+----
+
+Create a new user:
+
+[,bash]
+----
+user create <username>
+----
+
+Set password for a user:
+
+[,bash]
+----
+user set-password <username>
+----
+
+Update password of the current user:
+
+[,bash]
+----
+user update-password
+----
+
+Delete a user:
+
+[,bash]
+----
+user delete <username>
+----

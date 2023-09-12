@@ -1,4 +1,4 @@
-= Security features
+= Security
 :keywords: typedb, security, auth, authentication, encryption, vulnerability
 :longTailKeywords: TypeDB security, user authentication, data encryption
 :pageTitle: Security features

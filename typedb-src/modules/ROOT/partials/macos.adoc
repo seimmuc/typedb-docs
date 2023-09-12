@@ -47,17 +47,14 @@ ln -s /opt/typedb/typedb-all-mac-{latest-version}/typedb /usr/local/bin/typedb
 
 // tag::start[]
 
-Run the following command in a terminal:
+Run the following command in a terminal to start a TypeDB server:
 
 [,bash]
 ----
 typedb server
 ----
 
-Now we can start the TypeDB server by using the `typedb server` command in the local terminal.
-
 TypeDB will run in the foreground. If the terminal running TypeDB is closed, TypeDB server will be shut down.
-We recommend opening a new terminal to run TypeDB Console.
 
 // end::start[]
 

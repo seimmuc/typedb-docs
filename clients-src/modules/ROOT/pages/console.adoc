@@ -141,6 +141,7 @@ terminal (e.g: `chcp 936` for Chinese text).
 
 Most systems also allow us to set the system-wide locale, however this impacts the appearance of other applications.
 
+[#_non_interactive_mode]
 == Non-interactive mode
 
 We can provide several command-line arguments when running Console in the terminal.
@@ -359,7 +360,8 @@ transaction typedb data read --infer true
 
 == Examples
 
-=== Interactive mode
+[#_interactive_mode_examples]
+=== Interactive mode examples
 
 The following example illustrates how to create a database, define a schema, and insert some data into TypeDB.
 
@@ -371,7 +373,7 @@ double kbd:[Enter] (or kbd:[Enter] on an empty line) to send a query.
 
 [NOTE]
 ====
-The following code block shows terminal input and output at the same time. To be able to easily recognize inputs,
+The following code block shows terminal input and output at the same time.To be able to easily recognize inputs,
 they have one of the following prompts at the beginning of the line:
 
 - `$` -- for bash input
@@ -415,7 +417,7 @@ Transaction changes committed
 The above example creates a database with name `typedb`, lists all databases on the server, defines a schema for the
 database created earlier, then inserts an instance of `person` type into the database.
 
-=== Non-interactive mode
+=== Non-interactive mode examples
 
 ==== Command line arguments example
 
@@ -514,7 +516,7 @@ Database 'test' deleted
 
 | 2.18.0
 | 1
-| 2.18.0 to 2.21.1
+| 2.18.0 to 2.22.0
 | 2.18.0 to 2.21.1
 
 | 2.17.0

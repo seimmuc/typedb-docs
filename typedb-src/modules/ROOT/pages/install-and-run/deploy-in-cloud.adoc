@@ -45,8 +45,8 @@ Password: `password`
 ====
 // end::default-credentials[]
 
-To connect to a TypeDB Cloud deployment we can use any TypeDB Client: see the xref:deployments/connect.adoc[] page
-for more options.
+To connect to a TypeDB Cloud deployment, we can use any TypeDB Client.
+For more information, see the xref:typedb::managing-typedb/cloud-deployments/connect.adoc[] page.
 
 For example, to connect via TypeDB Console:
 

@@ -1,0 +1,20 @@
+define
+
+new-entity sub entity,
+    owns new-attribute;
+new-attribute sub attribute, value string;
+new-relation sub relation;
+
+rule new-rule:
+    when {
+        $ne isa new-entity;
+    } then {
+        $ne has new-attribute "new-value";
+    };
+
+rule another-new-rule:
+    when {
+        $ne isa new-entity, has new-attribute "new-value";
+    } then {
+        $ne has new-attribute "another-new-value";
+    };

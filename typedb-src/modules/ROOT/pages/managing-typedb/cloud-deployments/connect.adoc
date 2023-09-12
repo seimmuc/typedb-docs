@@ -6,7 +6,7 @@
 :experimental:
 
 TypeDB Cloud deployment is a cluster of TypeDB Enterprise servers.
-As such, it can receive connections from xref:clients::clients.adoc[TypeDB Clients]:
+As such, it can receive connections from xref:clients:ROOT:clients.adoc[TypeDB Clients]:
 
 * TypeDB Studio
 * TypeDB Console
@@ -26,7 +26,7 @@ To connect to a TypeDB Cloud deployment, we need the following information:
 
 To get the *address* of the server in a deployment, use the following steps:
 
-* Open the xref:deployments/management.adoc#_details[deployment details] page.
+* Open the xref:./deploy.adoc#_details[deployment details] page.
 * Find the `Address` column in the table in the `Machines` section.
 
 [NOTE]
@@ -44,12 +44,12 @@ Connection to a TypeDB Enterprise server requires valid *credentials* of a user 
 The user to connect to a TypeDB server/cluster is not the same user as a user on the TypeDB Cloud web portal.
 ====
 
-include::cloud::quickstart.adoc[tag=default-credentials]
+include::cloud:ROOT:quickstart.adoc[tag=default-credentials]
 
 We can configure users on in a TypeDB Enterprise server/cluster with TypeDB Console or with Driver API methods
-for xref:clients::java/java-api-ref.adoc#_users[Java],
-xref:clients::python/python-api-ref.adoc#_users[Python], and
-xref:clients::node-js/node-js-api-ref.adoc#_users[Node.js].
+for xref:clients:ROOT:java/java-api-ref.adoc#_users[Java],
+xref:clients:ROOT:python/python-api-ref.adoc#_users[Python], and
+xref:clients:ROOT:node-js/node-js-api-ref.adoc#_users[Node.js].
 
 [#_connection]
 == Connection
@@ -59,30 +59,30 @@ xref:clients::node-js/node-js-api-ref.adoc#_users[Node.js].
 TypeDB Studio::
 +
 --
-We can use the xref:clients::studio.adoc#_connect_to_typedb_server[basic connection guide] to connect to a TypeDB Cloud
+We can use the xref:clients:ROOT:studio.adoc#_connect_to_typedb_server[basic connection guide] to connect to a TypeDB Cloud
 deployment with TypeDB Studio, but we need to select the *TypeDB Cluster* option in the drop-down menu at the
 *Connect to TypeDB* window.
 That will display additional options to set addresses for multiple servers in a cluster, username, password,
 and TLS encryption switch.
 
-image::typedb::studio-connect-cluster.png[Connect to Studio window, width = 70%, link=self]
+image::studio-connect-cluster.png[Connect to Studio window, width = 70%, link=self]
 
 Use the btn:[Manage cluster addresses] button to set the address of a server to connect.
 
-image::typedb::studio-manage-cluster-address.png[Connect to Studio window, width = 70%, link=self]
+image::studio-manage-cluster-address.png[Connect to Studio window, width = 70%, link=self]
 
 Insert the TypeDB Cloud deployment server address (including the port number, for example, `127.0.0.1:1729` or rather
 `a242676f5710e462e9eed7a78d795ecb-1969767772.eu-west-2.elb.amazonaws.com:1729`) to the text field and press
 the btn:[Add] button.
 
-For more information on using TypeDB Studio, see the xref:clients::studio.adoc[] and the xref:typedb:ROOT:quickstart-guide.adoc[]
+For more information on using TypeDB Studio, see the xref:clients:ROOT:studio.adoc[] and the xref:quickstart-guide.adoc[]
 pages.
 --
 
 TypeDB Console::
 +
 --
-include::cloud::quickstart.adoc[tag=console-connect]
+include::cloud:ROOT:quickstart.adoc[tag=console-connect]
 --
 
 TypeDB Java Driver::
@@ -96,9 +96,9 @@ try (TypeDBClient.Cluster client = TypeDB.clusterClient(addresses, credentials))
 ----
 
 For more information on the *cluster client* methods explore the TypeDB Java Driver API
-xref:clients::java/java-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
+xref:clients:ROOT:java/java-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
 
-See the xref:clients::java/java-tutorial.adoc[] page to learn more about using the library.
+See the xref:clients:ROOT:java/java-tutorial.adoc[] page to learn more about using the library.
 --
 
 TypeDB Python Driver::
@@ -112,9 +112,9 @@ client = TypeDB.cluster_client("127.0.0.1:1729", credentials)
 ----
 
 For more information on the *cluster client* methods explore the TypeDB Python Driver API
-xref:clients::python/python-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
+xref:clients:ROOT:python/python-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
 
-See the xref:clients::python/python-tutorial.adoc[] page to learn more about using the library.
+See the xref:clients:ROOT:python/python-tutorial.adoc[] page to learn more about using the library.
 --
 
 TypeDB Node.js Driver::
@@ -129,22 +129,22 @@ const client = await TypeDB.clusterClient(
 ----
 
 For more information on the *cluster client* methods explore the TypeDB Node.js Driver API
-xref:clients::node-js/node-js-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
+xref:clients:ROOT:node-js/node-js-api-ref.adoc#_instantiating_a_typedb_cluster_client[reference].
 
-See the xref:clients::node-js/node-js-tutorial.adoc[] page to learn more about using the library.
+See the xref:clients:ROOT:node-js/node-js-tutorial.adoc[] page to learn more about using the library.
 --
 ====
 
 ==  What to do next?
 
 Upon successful connection to a server in a TypeDB Cloud deployment, we can use the TypeDB Client we have used
-to send some xref:typedb::fundamentals/queries.adoc[queries] to the server.
+to send some xref:fundamentals/queries.adoc[queries] to the server.
 
-For example, complete our xref:typedb:ROOT:quickstart-guide.adoc[] with TypeDB Cloud deployment.
+For example, complete our xref:quickstart-guide.adoc[] with TypeDB Cloud deployment.
 
 For more information, see the following:
 
-* xref:typedb::overview.adoc[TypeDB documentation] for a general understanding of how to use TypeDB server,
-* xref:clients::clients.adoc[TypeDB Clients documentation] for information on how to use Driver API methods,
+* xref:overview.adoc[TypeDB documentation] for a general understanding of how to use TypeDB server,
+* xref:clients:ROOT:clients.adoc[TypeDB Clients documentation] for information on how to use Driver API methods,
 TypeDB Studio GUI, or TypeDB Console CLI,
-* xref:typeql::overview.adoc[TypeQL documentation] for an advanced understanding of building a query and using patterns.
+* xref:typeql:ROOT:overview.adoc[TypeQL documentation] for an advanced understanding of building a query and using patterns.

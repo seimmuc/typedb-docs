@@ -1,4 +1,4 @@
-= Export and import
+= Database export and import
 :keywords: typedb, import, export, backup, save
 :longTailKeywords: TypeDB import data, TypeDB export data, TypeDB import database, TypeDB export database
 :pageTitle: Export and import

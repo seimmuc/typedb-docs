@@ -6,7 +6,7 @@
 :tabs-sync-option:
 
 Migrating data from other sources into TypeDB is an important step. It is considered that we have already
-developed a xref:development/schema.adoc[schema] for the TypeDB database according to the data model. Accurate and
+developed a xref:development/define-schema.adoc[schema] for the TypeDB database according to the data model. Accurate and
 comprehensive schema design will simplify not only data migration but also the design of data queries later on.
 
 [NOTE]
@@ -20,7 +20,7 @@ https://github.com/vaticle/typedb-driver-examples/tree/master/telecom/phone_call
 versions directly.
 ====
 
-To load data into a TypeDB database we need to perform xref:typedb::development/write.adoc#_insert[insert] queries.
+To load data into a TypeDB database we need to perform xref:typedb::development/write-data.adoc#_insert[insert] queries.
 The following <<_application,example>> showcases how to load <<_dataset,sample data>> from
 `CSV`, `JSON`, and `XML` formats using TypeDB Drivers for
 <<_java,Java>>,
@@ -85,7 +85,7 @@ named `phone_calls` in a TypeDB server and import the schema
 https://github.com/vaticle/typedb-driver-examples/blob/master/telecom/phone_calls/schema.tql[file,window=_blank].
 
 The step-by-step instructions how to create a database and load a schema file with TypeDB Studio can be found in the
-xref:quickstart/studio.adoc[Quickstart guide]. Make sure to use the schema file provided above instead of the IAM schema
+xref:quickstart-guide.adoc[Quickstart guide]. Make sure to use the schema file provided above instead of the IAM schema
 code/file from the Quickstart guide.
 
 [#_dataset]
