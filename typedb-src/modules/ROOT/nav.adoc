@@ -17,12 +17,12 @@
 ** xref:development/best.adoc[]
 
 * Managing TypeDB
-* xref:managing-typedb/configuration.adoc[]
-* xref:managing-typedb/user-management.adoc[]
-* xref:managing-typedb/version-update.adoc[]
-* xref:managing-typedb/export-import.adoc[]
-* xref:managing-typedb/high-availability.adoc[]
-* xref:managing-typedb/security.adoc[]
+** xref:managing-typedb/configuration.adoc[]
+** xref:managing-typedb/user-management.adoc[]
+** xref:managing-typedb/version-update.adoc[]
+** xref:managing-typedb/export-import.adoc[]
+** xref:managing-typedb/high-availability.adoc[]
+** xref:managing-typedb/security.adoc[]
 
 ////
 * Cloud deployments
