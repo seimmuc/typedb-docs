@@ -299,8 +299,10 @@ include::typedb:ROOT:quickstart-guide.adoc[tag=thing_deprecation]
 === Entity types
 // tag::entity_type_basics[]
 
+// tag::entity_type_definition[]
 *Entity types* (or subtypes of the `entity` root type) represent the classification of independent objects in the
 data model of our business domain.
+// end::entity_type_definition[]
 
 Instance of data of an entity type represents a standalone object that exists in our data model independently.
 
@@ -375,8 +377,10 @@ xref:typeql::schema/define-types.adoc[] page.
 === Relation types
 // tag::relation_type_basics[]
 
+// tag::relation_type_definition[]
 Relation types (or subtypes of the `relation` root type) represent relationships between types.
 Relation types have roles.
+// end::relation_type_definition[]
 
 Other types can play roles in relations if it’s mentioned in their definition. An instance of another type
 can be a role player for a role in the instance of a relation.
@@ -595,7 +599,9 @@ xref:typeql::schema/define-types.adoc[] page.
 === Attribute types
 // tag::attribute_type_basics[]
 
+// tag::attribute_type_definition[]
 Attribute types (or subtypes of the `attribute` root type) represent properties that other types can own.
+// end::attribute_type_definition[]
 
 Attribute types have a value type, and instances of attribute types have a value.
 This value is fixed and unique for every given instance of the attribute type.
