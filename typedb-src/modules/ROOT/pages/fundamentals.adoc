@@ -38,7 +38,7 @@ image::clients::client-server-comms.png[client-server]
 //database data separation
 TypeDB stores data in databases.
 
-Every database has a name, schema, and data.
+Every database has a name and consists of schema and data.
 
 For more information on how to create a database, see the xref:development/connect.adoc#_databases[Databases] section
 on the xref:development/connect.adoc[] page.
@@ -108,6 +108,7 @@ TypeDB usually uses a single connection to a single TypeDB server or cluster.
 //session
 //Without a session, we can establish a session, create a new database or delete an existing one.
 To open a session, we need a database name and a session type: `schema` or `data`.
+
 You can open more than one session to a database, but there are some limitations for the
 xref:development/acid-guarantees.adoc#_schema_integrity[schema integrity].
 
@@ -117,9 +118,10 @@ section on the xref:development/connect.adoc[] page.
 //transaction
 //Without a transaction we can
 To open a transaction, we need a transaction type: `read` or `write`.
+
 You can open more than one transaction in a session, but transactions have a time limit of 5 minutes by default.
 
-For more information on how to open a transaction, see the xref:development/connect.adoc#_transactions[sessions]
+For more information on how to open a transaction, see the xref:development/connect.adoc#_transactions[transactions]
 section on the xref:development/connect.adoc[] page.
 
 == Query
