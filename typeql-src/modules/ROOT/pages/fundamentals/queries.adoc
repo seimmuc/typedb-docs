@@ -13,5 +13,5 @@ This was the second page of the *Fundamentals* section.
 
 We recommend finishing the rest of the section:
 
-    1. xref:typedb::fundamentals/patterns.adoc[]
-    2. xref:typedb::fundamentals/inference.adoc[]
+    1. xref:fundamentals/patterns.adoc[]
+    2. xref:fundamentals/inference.adoc[]

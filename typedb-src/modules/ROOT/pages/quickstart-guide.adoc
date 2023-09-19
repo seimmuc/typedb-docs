@@ -151,12 +151,13 @@ TypeDB Studio::
 
 . Open the *Manage Databases* dialog by clicking the database icon on the left side of the toolbar.
 +
-image::studio-database.png[Database Manager button, width = 75%, link=self]
+image::studio-database.png[Database Manager button,width = 75%,link=self]
 . Enter `try-iam` in the text field, and click the btn:[Create] button next to it.
 . Now select `try-iam` from the database dropdown (next to the database icon).
 --
 ====
 
+[#_define_a_schema_from_a_file]
 == Define a schema from a file
 
 [tabs]

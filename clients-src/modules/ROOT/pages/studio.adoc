@@ -328,7 +328,7 @@ and execute the TypeQL code against the selected database.
 
 To run a query with inference, simply switch the inference option *on* before executing a query.
 
-The xref:typedb::fundamentals/inference.adoc[inference] transaction option can be switched *on* and *off* with
+The xref:typeql:ROOT:fundamentals/inference.adoc[inference] transaction option can be switched *on* and *off* with
 the btn:[infer] button in the top *Toolbar*.
 
 [NOTE]
@@ -392,7 +392,7 @@ If the *Type Browser* panel is not displayed -- click the *Type Browser* vertica
 TypeDB Studio window.
 ====
 
-All types are divided in three top level xref:typedb::fundamentals/types.adoc#_type[built-in types]:
+All types are divided in three top level xref:typeql:ROOT:fundamentals/types.adoc#_type[built-in types]:
 
 * Attribute
 * Entity

@@ -291,7 +291,7 @@ Java::
 --
 [,java]
 ----
-TypeDBSession session = client.session("iam", TypeDBSession.Type.DATA);
+TypeDBSession session = client.session("try-iam", TypeDBSession.Type.DATA);
 ----
 --
 
@@ -300,7 +300,7 @@ Python::
 --
 [,python]
 ----
-session = client.session("iam", SessionType.DATA)
+session = client.session("try-iam", SessionType.DATA)
 ----
 --
 
@@ -309,7 +309,7 @@ Node.js::
 --
 [,js]
 ----
-session = await client.session("iam", SessionType.DATA);
+session = await client.session("try-iam", SessionType.DATA);
 ----
 --
 =====
@@ -472,9 +472,13 @@ transaction.close();
 =====
 ====
 
+//#todo Add Send query section to the page structure!
 .See querying example
 [%collapsible]
 ====
+
+The following examples are using IAM database schema, that we defined in the
+xref:typedb::quickstart-guide.adoc#_define_a_schema_from_a_file[Quickstart guide].
 
 [tabs]
 =====
@@ -497,9 +501,9 @@ transaction try-iam data write
 insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";
 ----
 
-3. Press btn:[Enter] twice to send the query. +
-The first pressing will start a new line for the query. +
-Pressing btn:[Enter] on an empty line will send the query.
+3. Press btn:[Enter] twice to send the query: +
+* The first pressing will start a new line for the query.
+* Pressing btn:[Enter] on an empty line will send the query.
 
 4. Commit changes:
 +

@@ -9,9 +9,10 @@
 * Developing with TypeDB
 ** xref:development/connect.adoc[]
 ** xref:development/define-schema.adoc[]
-** xref:development/write-data.adoc[Insert data]
-** xref:development/write-data.adoc[Delete data]
-** xref:development/write-data.adoc[Update data]
+** xref:development/write-data.adoc[]
+//** xref:development/write-data.adoc[Insert data]
+//** xref:development/write-data.adoc[Delete data]
+//** xref:development/write-data.adoc[Update data]
 ** xref:development/read-data.adoc[]
 ** xref:development/infer.adoc[]
 ** xref:development/best.adoc[]

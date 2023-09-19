@@ -378,7 +378,7 @@ xref:typeql::schema/define-types.adoc[] page.
 // tag::relation_type_basics[]
 
 // tag::relation_type_definition[]
-Relation types (or subtypes of the `relation` root type) represent relationships between types.
+*Relation types* (or subtypes of the `relation` root type) represent relationships between types.
 Relation types have roles.
 // end::relation_type_definition[]
 
@@ -600,7 +600,7 @@ xref:typeql::schema/define-types.adoc[] page.
 // tag::attribute_type_basics[]
 
 // tag::attribute_type_definition[]
-Attribute types (or subtypes of the `attribute` root type) represent properties that other types can own.
+*Attribute types* (or subtypes of the `attribute` root type) represent properties that other types can own.
 // end::attribute_type_definition[]
 
 Attribute types have a value type, and instances of attribute types have a value.

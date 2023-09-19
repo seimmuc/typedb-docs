@@ -1,4 +1,4 @@
-= Process response
+= Response interpretation
 :Summary: TypeDB query response interpretation.
 :keywords: typeql, query, response, result, answer, concept
 :longTailKeywords: typeql response, concept map, typeql variables
@@ -43,11 +43,11 @@ xref:typeql::data/get.adoc#_aggregation[aggregation,window=_blank]
 | Stream/Iterator of *ConceptMap*
 
 | 8
-| xref:typedb::development/define-schema.adoc#_define_types[Define]
+| xref:typedb::development/define-schema.adoc#_typedb_define_types[Define]
 | *Future* (of empty response)
 
 | 9
-| xref:typedb::development/define-schema.adoc#_undefine[Undefine]
+| xref:typedb::development/define-schema.adoc#_typedb_undefine_query[Undefine]
 | *Future* (of empty response)
 
 | 10
@@ -66,8 +66,8 @@ section below.
 === Get query
 
 The ordinary xref:typedb::development/read-data.adoc#_get[Get query] (without
-xref:typedb:ROOT:fundamentals/queries.adoc#_modifiers[aggregation] or
-xref:typedb:ROOT:fundamentals/queries.adoc#_modifiers[grouping]) returns a stream/iterator of a ConceptMap objects.
+xref:typeql:ROOT:fundamentals/queries.adoc#_modifiers[aggregation] or
+xref:typeql:ROOT:fundamentals/queries.adoc#_modifiers[grouping]) returns a stream/iterator of a ConceptMap objects.
 
 Every iteration returns the result as a <<_conceptmap,ConceptMap>> object.
 
