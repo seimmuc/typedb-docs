@@ -1,0 +1,4 @@
+* xref:typedb::documentation-overview.adoc[Documentation overview]
+* xref:typedb::introduction.adoc[What is TypeDB]
+* xref:typedb::quickstart-guide.adoc[]
+* xref:typedb:resources:releases.adoc[Downloads center]

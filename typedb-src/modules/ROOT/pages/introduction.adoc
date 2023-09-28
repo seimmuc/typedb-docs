@@ -4,8 +4,10 @@
 :pageTitle: TypeDB introduction
 :summary: An intriduction for TypeDB's documentation
 
+// tag::typedb-poly-definition[]
 TypeDB is a polymorphic database with a conceptual data model, a strong subtyping system, a symbolic reasoning engine,
 and a beautiful and elegant type-theoretic language: TypeQL.
+// end::typedb-poly-definition[]
 
 == Short summary
 
@@ -67,9 +69,8 @@ Any TypeDB database has the following built-in types:
 
 An accurate type hierarchy can add context and constraints to data using strong typing and inheritance.
 
-.See an example of a type hierarchy in a schema below
-[%collapsible]
-====
+.Example of a type hierarchy in a schema
+
 [,typeql]
 ----
 define
@@ -104,10 +105,11 @@ security-token sub attribute, value string;
 date-added sub attribute, value datetime;
 ----
 
-See a TypeDB Studio visualization of that schema below:
+See below a TypeDB Studio visualization of that schema:
 
-image::intro-hierarchy-schema.png[]
-====
+[caption=""]
+.Type hierarchy example schema graph visualization
+image::intro-hierarchy-schema.png[Type hierarchy]
 
 For more information on how strong our type system is, see the xref:typeql::fundamentals.adoc#_types[Types] section on
 xref:typeql::fundamentals.adoc[Fundamentals page] in xref:typeql::overview.adoc[TypeQL documentation].
@@ -122,11 +124,12 @@ TypeDB can deduce new (virtual) attribute ownerships and relations if they influ
 
 Virtual (inferred) data is not persisted and will be lost when the transaction is closed.
 
-.See rule examples
-[%collapsible]
-====
-*Inferring new data*
+==== Examples
 
+===== Inferring new data
+//#todo Consider less levels of headings
+
+.Everyone is a dude rule example
 [,typeql]
 ----
 define
@@ -141,10 +144,11 @@ rule everyone-is-a-dude:
 
 The above example will add a `full-name` attribute with value `Dude` to every existing person.
 
-*Transitive relations*
-
 Let’s add to the above schema an ability for user-groups to be members of other user-groups.
 
+===== Transitive relations
+
+.Add an ability for a group to be a member of a group
 [,typeql]
 ----
 define
@@ -157,6 +161,7 @@ so that every member of Group A will become a member of Group B through the tran
 
 `person` -> Group A -> Group B.
 
+.Transitive group membership rule example
 [,typeql]
 ----
 define
@@ -179,7 +184,6 @@ For example, if we insert data of group-membership according to the following:
 where `->` -- means a `group-membership` relation with an entity on the left of the -> playing the role of `member`
 and the entity on the right playing the role of `group`. Then the transitivity, implemented by
 the `transitive-group-memmbership` rule, will make `person` into a member of all groups from A to E.
-====
 
 For more information on rule inference, see the xref:typeql::schema/define-rules.adoc[] page
 in xref:typeql::overview.adoc[TypeQL documentation].
@@ -194,13 +198,12 @@ Those patterns are easily readable and composable.
 We can add new statements to any place in a pattern, and we can even combine multiple patterns,
 to retrieve all matching data in just one query.
 
-.See data queries examples
-[%collapsible]
-====
+==== Examples
 
 The following Insert query creates two instances of the `person` type, and two groups and assigns a membership in one
 of the groups for one of the users:
 
+.Insert query example
 [,typeql]
 ----
 insert
@@ -226,6 +229,7 @@ The following query retrieves data of all instances of `user` type (which is a s
 have ownership over any attribute.
 It returns all matched instances of `user` type or its subtypes and the attributes they own.
 
+.Get query
 [,typeql]
 ----
 match
@@ -238,6 +242,7 @@ type `name` and value `users` such as there is no `group-membership` relation be
 Then the `insert` clause inserts a `group-membership` relation between all matched instances of `person`
 and all matched instances of `group`:
 
+.Insert query with a match clause
 [,typeql]
 ----
 match
@@ -248,7 +253,6 @@ not { ($p, $g) isa group-membership; };
 insert
 (member:$p, group:$g) isa group-membership;
 ----
-====
 
 == TypeDB editions
 
@@ -292,6 +296,6 @@ Windows, Linux, and macOS builds.
 . Install TypeDB locally with the xref:install-and-run.adoc[Installation guide] or deploy it in the
   https://cloud.typedb.com/[TypeDB Cloud].
 . Create a database and try some queries with the xref:quickstart-guide.adoc[Quickstart guide].
-. Learn only essentials about TypeDB with the xref:fundamentals.adoc[] page.
+. Learn only essentials about TypeDB with the xref:development/learn-basics.adoc[] page.
 . Learn more about connecting to a database, querying, and troubleshooting in our *Developing with TypeDB* subsection.
 . Prepare a production environment with the *Managing TypeDB* subsection.

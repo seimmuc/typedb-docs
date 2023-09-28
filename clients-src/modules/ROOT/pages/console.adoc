@@ -71,7 +71,7 @@ additional parameters (`cluster`, `username`, `password`, etc.):
 
 [,bash]
 ----
-./typedb console --cluster=127.0.0.1:1729 --username=<username> --password --tls-enabled=<true|false>
+typedb console --cluster=127.0.0.1:1729 --username=<username> --password --tls-enabled=<true|false>
 ----
 
 As a result we get a password prompt.

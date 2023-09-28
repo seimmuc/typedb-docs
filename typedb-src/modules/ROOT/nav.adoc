@@ -1,45 +1,38 @@
 // TypeDB
+include::typedb::partial$nav-root.adoc[]
 
+include::typedb::partial$nav.adoc[]
+
+include::typeql::partial$nav.adoc[]
+
+include::clients::partial$nav.adoc[]
+////
+// TypeDB
 * xref:overview.adoc[]
 * xref:introduction.adoc[]
 * xref:install-and-run.adoc[]
 * xref:quickstart-guide.adoc[]
-* xref:fundamentals.adoc[]
 
 * Developing with TypeDB
-** xref:development/connect.adoc[]
+** xref:development/learn-basics.adoc[]
+** xref:development/send-queries.adoc[]
 ** xref:development/define-schema.adoc[]
 ** xref:development/write-data.adoc[]
-//** xref:development/write-data.adoc[Insert data]
-//** xref:development/write-data.adoc[Delete data]
-//** xref:development/write-data.adoc[Update data]
 ** xref:development/read-data.adoc[]
-** xref:development/infer.adoc[]
-** xref:development/best.adoc[]
+** xref:development/infer-data.adoc[]
+** xref:development/best-practices.adoc[]
+** xref:development/acid-guarantees.adoc[]
 
 * Managing TypeDB
 ** xref:managing-typedb/configuration.adoc[]
-** xref:managing-typedb/user-management.adoc[]
-** xref:managing-typedb/version-update.adoc[]
-** xref:managing-typedb/export-import.adoc[]
+** xref:managing-typedb/logs.adoc[]
+** xref:managing-typedb/users.adoc[]
+** xref:managing-typedb/upgrading.adoc[]
+//** xref:managing-typedb/export-import.adoc[]
 ** xref:managing-typedb/high-availability.adoc[]
 ** xref:managing-typedb/security.adoc[]
-
-////
-* Cloud deployments
-** xref:cloud-deployments/account.adoc[]
-** xref:cloud-deployments/connect.adoc[]
-** xref:cloud-deployments/deploy.adoc[]
-** xref:cloud-deployments/organization.adoc[]
-** xref:cloud-deployments/projects.adoc[]
-
-* Self-hosted deployments
-** xref:self-hosted-deployments/configuration.adoc[]
-** xref:self-hosted-deployments/export-import.adoc[]
-** xref:self-hosted-deployments/version-update.adoc[]
-** xref:self-hosted-deployments/high-availability.adoc[]
-** xref:self-hosted-deployments/security.adoc[]
-////
+** xref:install-and-run/enterprise/install-and-run.adoc[Enterprise deployments]
+** xref:install-and-run/enterprise/kubernetes.adoc[Kubernetes]
 
 * Tutorials
 ** xref:tutorials/iam-schema.adoc[]
@@ -47,11 +40,31 @@
 ** xref:tutorials/data-migration.adoc[]
 ** xref:tutorials/new-driver-tutorial.adoc[]
 
+* xref:resources:releases.adoc[]
+
+.Resources
+* https://typedb.com/discord[Discord]
+* xref:typeql::overview.adoc[TypeQL]
+* xref:clients::clients.adoc[Clients]
+////
+////
+* Cloud deployments
+** xref:cloud-deployments/account.adoc[]
+** xref:cloud-deployments/send-queries.adoc[]
+** xref:cloud-deployments/deploy.adoc[]
+** xref:cloud-deployments/organization.adoc[]
+** xref:cloud-deployments/projects.adoc[]
+
+* Self-hosted deployments
+** xref:self-hosted-deployments/configuration.adoc[]
+** xref:self-hosted-deployments/export-import.adoc[]
+** xref:self-hosted-deployments/upgrading.adoc[]
+** xref:self-hosted-deployments/high-availability.adoc[]
+** xref:self-hosted-deployments/security.adoc[]
+////
+
 //* Deep dive
 //** xref:deep/deep-dive.adoc[Deep dive in Fundamentals]
 //*** xref:fun/types-dd.adoc[Deep dive in the type system]
 //*** xref:fun/queries-dd.adoc[Deep dive in the patterns]
 //*** xref:fun/inference-dd.adoc[Deep dive in the inference]
-
-//.Resources
-* xref:resources:releases.adoc[]

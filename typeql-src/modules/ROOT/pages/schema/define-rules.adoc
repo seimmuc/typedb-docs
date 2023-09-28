@@ -8,7 +8,7 @@ Rules are defined independently of types in the same schema.
 However, any types used in a rule must be defined in the schema.
 
 They are executed only as a part of xref:typeql::data/get.adoc[Get queries] when the
-xref:typedb:ROOT:development/infer.adoc[inference] option is *enabled* in a *read* transaction.
+xref:typedb:ROOT:development/infer-data.adoc[inference] option is *enabled* in a *read* transaction.
 
 [IMPORTANT]
 ====
@@ -156,7 +156,7 @@ subtype, and creates a rule `size-convert` to create ownership of `size-mb` with
 xref:typeql::data/basic-patterns.adoc#_value_variables[value variable] for
 xref:data/basic-patterns.adoc#_arithmetic_operations[arithmetics].
 
-With this rule defined and the inference option xref:typedb:ROOT:development/infer.adoc#_how_to_use_inference[enabled],
+With this rule defined and the inference option xref:typedb:ROOT:development/infer-data.adoc#_how_to_use_inference[enabled],
 we can try the following query:
 
 [,typeql]
@@ -244,5 +244,5 @@ The example above illustrates a more complex rule using the IAM schema.
 In short, the permission to access some file with the action that has `name` of `view_file` can be inferred by the
 rule from the permission to `modify_file` the same file.
 
-The xref:typedb:ROOT:development/infer.adoc#_example[Example] section of Inferring data page gives a full explanation
+The xref:typedb:ROOT:development/infer-data.adoc#_example[Example] section of Inferring data page gives a full explanation
 of how this rule works.

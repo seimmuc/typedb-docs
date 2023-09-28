@@ -72,7 +72,7 @@ attempting to make a single gRPC call to TypeDB, and create a database.
 To instantiate a client we need to be able to establish a network connection to a TypeDB Core server or a
 TypeDB Enterprise cluster.
 
-This connection opens us basic features of xref:typedb:ROOT:development/connect.adoc#_databases[database] management, user
+This connection opens us basic features of xref:typedb:ROOT:development/send-queries.adoc#_databases[database] management, user
 management (TypeDB Enterprise & TypeDB Cloud only) and enables us to open a session.
 
 [#_grpc]
@@ -220,7 +220,7 @@ It collects all requests in a 1ms time window, bundles them into a single gRPC m
 
 === Exploring query answers
 
-See the xref:typedb::development/response.adoc[Response interpretation] page to find information of possible
+See the xref:typedb:ROOT:bin/response.adoc[Response interpretation] page to find information of possible
 response to different query types.
 
 The `ConceptMap` objects returned by a xref:typedb::development/read-data.adoc#_get[Get query] can contain

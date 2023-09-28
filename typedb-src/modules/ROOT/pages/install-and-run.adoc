@@ -147,6 +147,6 @@ to set up a database and to try different types of queries.
 
 Alternatively, any other xref:clients:ROOT:clients.adoc[TypeDB Client] can be used to connect to a TypeDB server.
 
-To find out only essential information about TypeDB, check the xref:typedb::fundamentals.adoc[] page.
+To find out only essential information about TypeDB, check the xref:development/learn-basics.adoc[] page.
 
 To learn more about connecting to TypeDB and querying it, see the *Developing with TypeDB* section.

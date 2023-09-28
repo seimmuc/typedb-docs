@@ -21,7 +21,7 @@ A Define query is used to define a TypeDB database schema. See the <<_typedb_def
 An Undefine query is used to delete types or rules from a schema. See the <<_typedb_undefine_query>> section below.
 
 For more information on how to connect to a TypeDB server or cluster, open a session to a database,
-open a transaction, and send a query, see the xref:typedb::development/connect.adoc[] page.
+open a transaction, and send a query, see the xref:typedb::development/send-queries.adoc[] page.
 
 ////
 1. Build the TypeQL query string (see below on this page):
@@ -30,9 +30,9 @@ open a transaction, and send a query, see the xref:typedb::development/connect.a
     * See how to <<_undefine_types,undefine types>>;
     * See how to <<_undefine_rules,undefine rules>>;
     * See how to <<_modify_types, modify types>>.
-2. xref:development/connect.adoc#_clients[Connect] to a TypeDB database with a xref:development/connect.adoc#_sessions[SCHEMA session].
+2. xref:development/send-queries.adoc#_clients[Connect] to a TypeDB database with a xref:development/send-queries.adoc#_sessions[SCHEMA session].
 3. Run a proper query type (xref:typeql:ROOT:fundamentals/queries.adoc#_define_query[Define]/ xref:typeql:ROOT:fundamentals/queries.adoc#_define_query[Undefine])
-   with a query string we built in a xref:development/connect.adoc#_transactions[WRITE transaction].
+   with a query string we built in a xref:development/send-queries.adoc#_transactions[WRITE transaction].
 4. Commit the transaction to persist the changes.
 ////
 

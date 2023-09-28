@@ -13,7 +13,7 @@ xref:fundamentals/inference.adoc[inference,window=_blank].
 A Get query triggers a search in a database based on the xref:typeql::data/basic-patterns.adoc[pattern] in the
 `match` clause. It retrieves concepts and values from a database. The result of a get query can vary depending on the
 query. <<_modifiers,Modifiers>>, including <<_aggregation,aggregation>> and <<_group,grouping>>, can drastically change
-the response format. See the xref:typedb:ROOT:development/response.adoc[Response interpretation] page.
+the response format. See the xref:typedb:ROOT:bin/response.adoc[Response interpretation] page.
 
 [NOTE]
 ====

@@ -15,7 +15,9 @@ This Quickstart guide shows how to set up a TypeDB database and execute queries 
 
 For the purpose of this Quickstart guide, use the following files:
 
+[#_iam_schema]
 * xref:attachment$iam-schema.tql[iam-schema.tql] -- The TypeQL define query for the IAM schema.
+[#_iam_microdataset]
 * xref:attachment$iam-data.tql[iam-data.tql] -- TypeQL insert queries of minimalistic dataset for the IAM schema.
 
 [IMPORTANT]
@@ -76,10 +78,6 @@ TypeDB Console::
 --
 By default, TypeDB Console will try to connect to the default server address of `localhost:1729`.
 
-[#_console_change_addr]
-.See examples of how to connect to a non-default address
-[%collapsible]
-=====
 .Server connection example
 [,bash]
 ----
@@ -91,7 +89,6 @@ typedb console --server 127.0.0.1:1729
 ----
 typedb console --cluster=i0.deployment-a4fa2444.cloud.typedb.com:1729 --username=admin --password --tls-enabled --tls-root-ca="/Users/username/typedb-cloud/typedb-cloud-root-ca.pem"
 ----
-=====
 
 To exit TypeDB Console press kbd:[Ctrl+C].
 
@@ -110,17 +107,10 @@ Connect to TypeDB:
 . Click the btn:[Connect to TypeDB] button  on the right side of the toolbar.
 . Enter TypeDB server address (e.g., `localhost:1729`) in the *Address* field and click the btn:[Connect] button.
 
-[#_studio_connect_cluster]
-.See how to connect to a cluster of TypeDB
-[%collapsible]
-=====
 1. Select `TypeDB Cluster` option in the *Server* field.
 2. Click the btn:[Manage Cluster Addresses] button and add all known addresses for TypeDB servers on the cluster you
    are connecting.
 3. Fill all other fields with appropriate information and click the btn:[Connect] button.
-=====
-
-*Selecting the project folder*
 
 Select the folder with the <<_download_sample_data,downloaded TypeQL files>> as
 xref:clients::studio.adoc#_open_a_project_directory[project directory,window=_blank] by using one of the following
@@ -177,16 +167,6 @@ TypeDB Studio::
 --
 Open the xref:typedb::attachment$iam-schema.tql[iam-schema.tql,window=_blank] file from the project panel on the top left.
 
-[#_iam_schema]
-.See the full listing of the `iam-schema.tql` file
-[%collapsible]
-=====
-[,typeql]
-----
-include::typedb::attachment$iam-schema.tql[lines=17..]
-----
-=====
-
 Define the schema for the database selected earlier, by executing the define query from the file:
 
 . Ensure the btn:[Session type] (`schema` / `data`) is set to the `schema` and the
@@ -216,16 +196,6 @@ TypeDB Studio::
 +
 --
 Open the xref:attachment$iam-data.tql[iam-data.tql] file from the project panel.
-
-[#_iam_microdataset]
-.See the full listing of the `iam-data.tql` file
-[%collapsible]
-=====
-[,typeql]
-----
-include::typedb::attachment$iam-data.tql[lines=17..]
-----
-=====
 
 Load the data into the database selected earlier, by executing the insert queries from the file:
 
@@ -465,6 +435,8 @@ delete $p has $e;
 --
 ====
 
+//#todo Add a page with more queries and a link to it. TypeQL showcase / Showcase queries / Featured queries
+////
 === Additional query examples
 
 [#_console_more_queries]
@@ -654,17 +626,18 @@ delete $pe isa permission;
 ====
 
 =====
+////
 
 == Learn more
 
 After completing this guide, we recommend the following order of topics to continue exploring TypeDB:
 
-1. Explore the xref:./fundamentals.adoc[] page to learn essentials about using TypeDB.
-2. Find out more about how to xref:development/connect.adoc[connect] to TypeDB, and use databases, sessions,
+1. Explore the xref:development/learn-basics.adoc[] page to learn essentials about using TypeDB.
+2. Find out more about how to xref:development/send-queries.adoc[connect] to TypeDB, and use databases, sessions,
    and transactions.
 3. Learn how to define a xref:development/define-schema.adoc[schema] of a database.
 4. Discover how to xref:development/write-data.adoc[write] or xref:development/read-data.adoc[read] data from a TypeDB database.
-5. Check out how to interpret a TypeDB xref:development/response.adoc[responses] to a query.
+5. Check out how to interpret a TypeDB xref:bin/response.adoc[responses] to a query.
 6. Explore xref:clients:ROOT:clients.adoc[TypeDB Clients] to find the most suitable for your use case.
 7. (Optional) Learn more about the xref:tutorials/iam-schema.adoc[IAM sample schema] that will be used in the
    majority of examples throughout this documentation.

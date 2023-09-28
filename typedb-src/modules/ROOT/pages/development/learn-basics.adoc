@@ -1,0 +1,257 @@
+= Learn basics
+:keywords: typedb, basics, connect, connection, session, database
+:longTailKeywords: basic concepts of typedb, typedb connection, typedb database, typedb session
+:pageTitle: Connecting
+:summary: Brief description of connection to TypeDB.
+:tabs-sync-option:
+
+This page explains basic TypeDB terminology and operations required for anyone to continue learning how to use TypeDB.
+
+== TypeDB
+
+TypeDB is a transactional DBMS with xref:typedb::development/acid-guarantees.adoc[],
+that uses TypeQL as its query language.
+
+//What is TypeDB
+TypeDB: :: DBMS software with polymorphism, strong type system, fully declarative query language, and reasoning engine.
+
+TypeQL: :: Declarative query language used by TypeDB.
+
+=== TypeDB server and cluster
+
+TypeDB is a server-side software, used to manage databases and process queries written in TypeQL.
+
+//TypeDB editions
+TypeDB has three editions: TypeDB Cloud, TypeDB Enterprise, and TypeDB Core.
+All editions support the same set of query types and the same TypeQL syntax.
+TypeDB Core can only be used for creating singular servers of TypeDB.
+While other editions support clustering, replicating, load-balancing, encryption, etc.
+
+For more information on differences between TypeDB editions,
+see the https://typedb.com/deploy[Deploy] page of our website.
+
+=== TypeDB Clients
+
+//client-server architecture
+//client role
+To connect to a TypeDB, one can use a TypeDB Client.
+TypeDB Clients are capable of sending a query to TypeDB server or cluster and retrieving an answer.
+TypeDB uses https://github.com/vaticle/typedb-protocol[TypeDB protocol], based on https://grpc.io/[gRPC],
+to communicate queries and responses with TypeDB Clients.
+
+TypeDB Client: :: Any software capable of communicating with TypeDB through the TypeDB protocol.
+
+A TypeDB Client can be built with an existing library that implements TypeDB Protocol and provides a native API
+for interacting with TypeDB, queries, and answers.
+We call such a library a TypeDB Driver.
+
+TypeDB Driver: :: A language-specific library that implements the TypeDB protocol and provides a TypeDB Driver API.
+
+TypeDB Drivers are used to create other TypeDB Clients, such as
+xref:clients:ROOT:studio.adoc[TypeDB Studio,window=_blank] and
+xref:clients:ROOT:console.adoc[TypeDB Console,window=_blank].
+
+image::clients::client-server-comms.png[client-server, width=50%, link=self]
+
+== Database
+
+//database data separation
+TypeDB stores data in databases.
+Every database has a name and consists of schema and data.
+Schema is like a blueprint of data in a database.
+One can define constraints on data and rules for reasoning in a schema.
+
+Database: :: A named collection of data with a schema.
+
+Schema: :: A database schema is a full set of definitions for all types and rules used in the database.
+
+A TypeDB server/cluster can store multiple databases, but is optimized for a small number of databases per server/cluster.
+It is best to keep the number of databases in any given installation **under 10**.
+
+For more information on how to create and manage databases, see the
+xref:development/send-queries.adoc#_databases[Databases] section on the
+xref:development/send-queries.adoc[] page.
+
+//storage
+//Physical persistent storage is implemented with https://www.speedb.io/[SpeedDB].
+
+=== Type
+
+A type for data is like a class for an object in OOP programming languages.
+A type is also a category for classification of data instances.
+All constraints defined for a type are applied for all instances of this type.
+Whenever we insert some data into a TypeDB database we create instances of types,
+existing in the schema of the database.
+
+//types
+Type: :: A template for creating a data instance.
+
+A new type can be defined by subtyping an existing type.
+Subtype inherits constraints and properties of its supertype.
+Any type has exactly one supertype.
+
+A brand-new database with an empty schema has built-in root types: `entity`, `relation`, and `attribute`.
+All user-defined types in a schema are direct or indirect subtypes of these root types.
+
+include::typeql:ROOT:fundamentals.adoc[tag=entity_type_definition]
+
+include::typeql:ROOT:fundamentals.adoc[tag=relation_type_definition]
+
+include::typeql:ROOT:fundamentals.adoc[tag=attribute_type_definition]
+
+For more information on schema types, see the xref:typeql:ROOT:fundamentals.adoc#_types[Types] section on the
+xref:typeql:ROOT:fundamentals.adoc[] page of the xref:typeql::overview.adoc[TypeQL] documentation.
+
+//rules
+Rules represent logic embedded in a schema.
+Rules are used by reasoning engine to infer new data, based on patterns, found in existing data.
+
+Rule: :: A combination of a condition and a conclusion, defined in a database schema
+         and used by the TypeDB reasoning engine to infer new data.
+
+For more information on rules, see the xref:typeql:ROOT:fundamentals.adoc#_rules[Rules] section on the
+xref:typeql:ROOT:fundamentals.adoc[] page of the xref:typeql::overview.adoc[TypeQL] documentation.
+
+=== Data
+//Instance of a type
+
+To insert any data in a TypeDB database, we instantiate a type, defined in a database's schema.
+All inserted data should be compliant with constraints from a schema of a database it is inserted to.
+Retrieving data from a database can result in getting values directly, but more often it includes dealing with concepts,
+returned by a TypeDB Driver through Driver API.
+
+//Concept
+Concept: :: Either a type or an instance of a type in a TypeDB database.
+
+TypeDB Driver API has methods to process concepts.
+For more information on Driver API concept methods, see the relevant Driver API reference:
+
+* xref:clients:ROOT:java/java-api-ref.adoc#_concept_methods[Java]
+* xref:clients:ROOT:python/python-api-ref.adoc#_concept_methods[Python]
+* xref:clients:ROOT:node-js/node-js-api-ref.adoc#_concept_methods[Node.js]
+
+//Value
+
+== Connection
+
+//client
+To send a query to TypeDB, we need to do the following:
+
+. Establish a network connection between a TypeDB Client and a TypeDB server or a cluster.
+. Open a session to a database.
+. Open a transaction.
+
+image::clients::concurrency-model.png[Session-transaction-query,link=self,width=100%]
+
+To establish a network connection, we need an address of a server or cluster, including the port.
+//For clusters (available in Enterprise and CLoud editions) we also need username, password, and CA certificate for TLS.
+//TypeDB usually uses a single connection to a single TypeDB server or cluster.
+
+//session
+[#_learn_session]
+A session is like a tunnel connection to a database in a TypeDB server or cluster.
+To open a session, we need a database name and a session type.
+There are two types of sessions in TypeDB: `schema` and `data`.
+Use session types according to their names.
+A good principle to follow is for logically coherent transactions to be grouped into a single session.
+
+You can open more than one session to a database.
+You can read data and schema with any type of session,
+but to modify data or schema you must use the correct session type.
+To learn more about limitations on sessions and transactions, see the
+xref:development/acid-guarantees.adoc#_schema_integrity[schema integrity,window=_blank] section.
+
+[IMPORTANT]
+====
+It is recommended to avoid long-running sessions, because of possible network failures.
+====
+
+[NOTE]
+====
+Any TypeDB Client will regularly exchange internal signals with the server to keep the session alive when it's open.
+The default timeout is 30 seconds.
+====
+
+For more information on how to open a session, see the xref:development/send-queries.adoc#_sessions[sessions]
+section on the xref:development/send-queries.adoc[] page.
+
+//transaction
+[#_learn_transaction]
+//Without a transaction we can
+To open a transaction, we need a transaction type: `read` or `write`.
+You can open more than one transaction in a session, but transactions have a time limit of 5 minutes by default.
+For more information on how to open a transaction, see the xref:development/send-queries.adoc#_transactions[transactions]
+section on the xref:development/send-queries.adoc[] page.
+
+Choose an appropriate session type and queries to write schema or data:
+
+[cols="^,^,^,^,^",options="header"]
+|===
+| Session type | Reading data | Writing data | Reading schema | Writing schema
+
+| DATA
+| Yes
+| Yes
+| Yes
+h| *No*
+
+| SCHEMA
+| Yes
+h| *No*
+| Yes
+| Yes
+|===
+
+== Query
+
+All queries to a TypeDB database are written in TypeQL.
+TypeQL is a *fully declarative* query language that can be used as both
+https://en.wikipedia.org/wiki/Data_definition_language[DDL] and
+https://en.wikipedia.org/wiki/Data_manipulation_language[DML].
+
+include::typeql:ROOT:queries.adoc[tag=queries_table]
+
+For more information on query types, read the xref:typeql:ROOT:queries.adoc[] page.
+
+//There are different ways to send a query to a TypeDB database, depending on what TypeDB Client is used.
+//For more information on how to send a query, see the xref:typedb::development/send-queries.adoc[] page.
+
+== Pattern matching
+
+TypeDB xref:typeql:ROOT:fundamentals/queries.adoc[queries] are written in xref:typeql:ROOT:overview.adoc[TypeQL]
+and use *patterns* to manipulate schema and data of a database.
+
+A pattern is a set of statements.
+By default, conjunction combines all statements.
+Disjunction and negation can be used explicitly.
+
+=== Example
+
+image::example-pattern.png[Complex example]
+
+The pattern is a conjunction of five different pattern types:
+
+. *Conjunction 1* specifies the variables for two `person` instances, their `full-names`, `action`, and `file` that
+  has path `README.md`, specifies their types.
+. *Disjunction* specifies that the actions of interest are either `modify_file` or `view_file`.
+. *Negation 1* specifies that person `$p1` shall not have `full-name` with value of `Masako Holley`.
+. *Negation 2* specifies that person `$p2` shall not have `full-name` with value of `Masako Holley`.
+. *Conjunction 2* specifies that the `file` has `access` with the `action` that we specified earlier,
+  and both instances of the `person` to have the `permission` to the specified `access`.
+
+In short, the above example finds pairs of people who both have permission to access the same file
+with a path of `README.md`. The pattern additionally specifies the access to be either `modify_file` or `view_file`,
+and neither people to have the full-name `Masako Holley`.
+
+== Learn more
+
+We recommend continuing your TypeDB journey by going through the *Developing with TypeDB* section:
+
+* xref:development/send-queries.adoc[]
+* xref:development/define-schema.adoc[]
+* xref:development/write-data.adoc#_insert[Insert data]
+* xref:development/write-data.adoc#_delete_query[Delete data]
+* xref:development/write-data.adoc#_update_query[Update data]
+* xref:development/read-data.adoc[]
+* xref:development/infer-data.adoc[]
+* xref:development/best-practices.adoc[]

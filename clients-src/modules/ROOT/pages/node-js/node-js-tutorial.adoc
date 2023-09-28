@@ -22,8 +22,8 @@ const { TypeDB } = require("typedb-client");
 
 == Connecting
 
-Instantiate a TypeDB Core client and open a xref:typedb:ROOT:development/connect.adoc#_sessions[session] to a
-xref:typedb:ROOT:development/connect.adoc#_databases[database].
+Instantiate a TypeDB Core client and open a xref:typedb:ROOT:development/send-queries.adoc#_sessions[session] to a
+xref:typedb:ROOT:development/send-queries.adoc#_databases[database].
 
 [NOTE]
 ====

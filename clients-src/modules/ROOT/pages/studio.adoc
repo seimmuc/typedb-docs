@@ -84,17 +84,24 @@ To use most of TypeDB Studio functions we need to connect to a TypeDB server and
 [#_connect_to_typedb_server]
 === Connect to TypeDB server
 
-At the top right-hand corner click the btn:[Connect to TypeDB] button. It will open a windows with the same name and
+// tag::connect[]
+At the top right-hand corner, click the btn:[Connect to TypeDB] button. It will open a windows with the same name and
 the connection settings as shown below.
 
-image::studio/connection-interface-disconnected.png[Connection Manager Disconnected, width = 70%, link=self]
+image::clients::studio/connection-interface-disconnected.png[Connection Manager Disconnected, width = 70%, link=self]
 
 Fill in the address of the TypeDB server. By default, it's: `localhost:1729`. Click the btn:[Connect] button.
+// end::connect[]
 
 image::studio/connection-interface-connected.png[Connection Manager Connected, width = 70%, link=self]
 
-Once TypeDB Studio connected to a TypeDB server successfully, the connection manager window should close automatically.
-If we reopen the window we can find the green status field in the bottom left corner, as shown above.
+// tag::cluster-connect[]
+To connect to a TypeDB Cloud or a TypeDB Enterprise cluster,
+select TypeDB Cluster option in the btn:[Server] field instead.
+Fill the connection parameters and Click the btn:[Connect] button.
+
+image::clients::studio/cluster-connection-interface.png[Connection Manager Cluster Disconnected, width = 70%, link=self]
+// end::cluster-connect[]
 
 [NOTE]
 ====
@@ -111,13 +118,15 @@ In the `Connect to TypeDB` window click on the btn:[Disconnect] button.
 [#_create_a_database]
 === Create a database
 
+// tag::create-db[]
 To create a new database make sure TypeDB Studio is connected to a TypeDB server and click on the
 btn:[Manage Databases] button (with a database icon) as shown below.
 
-image::studio/studio-database.png[Database icon]
+image::clients::studio/studio-database.png[Database icon,width=55%]
 
 Enter the name for the new database at the text field at the bottom of the `Manage Databases` window and hit
 btn:[Create].
+// end::create-db[]
 
 image::studio/databases-interface-iam-database.png[Database Manager with IAM database, 300, link=self]
 
@@ -242,8 +251,8 @@ with query to run.
 +
 image::studio/project-schema-pasted.png[Query text, width = 70%, link=self]
 
-. Choose the correct xref:typedb:ROOT:development/connect.adoc#_sessions[session,window=_blank] (`schema`/`data`) type and
-  xref:typedb:ROOT:development/connect.adoc#_transactions[transaction,window=_blank] (`read`/`write`) type to run the query
+. Choose the correct xref:typedb:ROOT:development/send-queries.adoc#_sessions[session,window=_blank] (`schema`/`data`) type and
+  xref:typedb:ROOT:development/send-queries.adoc#_transactions[transaction,window=_blank] (`read`/`write`) type to run the query
   by clicking on those options on the *Toolbar* switches.
 . Run the query by clicking on the btn:[Run Query] (▶) button. +
 *Run* panel will be expanded on the bottom of the query to show the results of the query execution attempt.
@@ -299,18 +308,18 @@ image::studio/studio-transaction-controls.png[Transaction controls, link=self]
 
 From left to right (numbered respectively to the screenshot numbers):
 
-. xref:typedb:ROOT:development/connect.adoc#_sessions[Session] type switch:
+. xref:typedb:ROOT:development/send-queries.adoc#_sessions[Session] type switch:
  ** `schema` -- to use schema session type
  ** `data` -- to use data session type
-. xref:typedb:ROOT:development/connect.adoc#_transactions[Transaction] type switch:
+. xref:typedb:ROOT:development/send-queries.adoc#_transactions[Transaction] type switch:
  ** `write` -- to use write transaction
  ** `read` -- to use read transaction
 . btn:[snapshot] button -- enables snapshot feature that encapsulates transaction in a snapshot of a database's data
 until the transaction committed or closed. Write transactions are always snapshoted. May be enabled or disabled
 for read transactions.
-. btn:[infer] button -- enable xref:typedb::/development/infer.adoc[inferring data] by rules. Only available for read
+. btn:[infer] button -- enable xref:typedb::/development/infer-data.adoc[inferring data] by rules. Only available for read
 transactions.
-. btn:[explain] button -- enable xref:typedb::development/infer.adoc#_explain_query[explanations] mechanics by providing
+. btn:[explain] button -- enable xref:typedb::development/infer-data.adoc#_explain_query[explanations] mechanics by providing
 `explainables` methods for results. Only available for read transactions with *snapshot* and *infer* enabled.
 . btn:[Transaction status] (Circle (●) icon) indicator -- transaction activity indicator. Green if there is a
 transaction opened by TypeDB Studio at this moment. Gray if there is no opened transaction. Rotating animation --
@@ -353,7 +362,7 @@ image::clients::studio/inference.png[Inference results example, width = 70%, lin
 To run a query with explanation, simply switch the explanation option *on* before executing a query. To be able to do
 that the inference and the snapshot options must also be enabled.
 
-The xref:typedb::development/infer.adoc#_explain_query[explanation] transaction option can be switched
+The xref:typedb::development/infer-data.adoc#_explain_query[explanation] transaction option can be switched
 *on* and *off* with the btn:[explain] button in the top *Toolbar*. The inference and snapshot options can be enabled
 by the btn:[infer] and the btn:[snapshot] buttons respectively.
 
@@ -509,7 +518,7 @@ Default value: *On*.
 |===
 | TypeDB Studio | Protocol version | TypeDB | TypeDB Cloud & TypeDB Enterprise
 
-| 2.18.0 to 2.21.1
+| 2.18.0 to 2.21.2
 | 1
 | 2.18.0 to 2.22.0
 | 2.18.0 to 2.21.1

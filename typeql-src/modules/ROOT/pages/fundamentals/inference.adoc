@@ -20,7 +20,7 @@ The results are transaction-bound and are not persisted. As soon as transaction 
 perish.
 ====
 
-When executing a `get` query with the `infer` transaction option xref:typedb:ROOT:development/infer.adoc#_how_to_use_inference[enabled]
+When executing a `get` query with the `infer` transaction option xref:typedb:ROOT:development/infer-data.adoc#_how_to_use_inference[enabled]
 (`True`), TypeDB inspects and triggers rules that may lead to new answers to the query.
 
 It returns data that answers the query taking into account inference results. Reasoning can proceed from one rule
@@ -61,11 +61,11 @@ This was the last page of the *Fundamentals* section.
 
 We recommend to continue exploring TypeDB by going through the *Development* section:
 
-* xref:typedb:ROOT:development/connect.adoc[]
+* xref:typedb:ROOT:development/send-queries.adoc[]
 * xref:typedb:ROOT:development/define-schema.adoc[]
 * xref:typedb:ROOT:development/write-data.adoc[]
 * xref:typedb:ROOT:development/read-data.adoc[]
-* xref:typedb:ROOT:development/infer.adoc[]
-* xref:typedb:ROOT:development/response.adoc[]
-* xref:typedb:ROOT:development/api.adoc[]
-* xref:typedb:ROOT:development/best.adoc[]
+* xref:typedb:ROOT:development/infer-data.adoc[]
+* xref:typedb:ROOT:bin/response.adoc[]
+* xref:typedb:ROOT:bin/api.adoc[]
+* xref:typedb:ROOT:development/best-practices.adoc[]

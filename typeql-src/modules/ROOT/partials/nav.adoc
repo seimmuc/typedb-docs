@@ -1,0 +1,23 @@
+.TypeQL
+* xref:typeql::overview.adoc[TypeQL overview]
+* xref:typeql::overview.adoc[Introduction]
+* xref:typeql::fundamentals.adoc[Schema]
+* xref:typeql::queries.adoc[]
+//* xref:typeql::schema/define-types.adoc[Match clause]
+* Match clause
+** xref:typeql::schema/define-types.adoc[Matching patterns]
+** xref:typeql::schema/define-rules.adoc[Advanced patterns]
+//* xref:typeql::overview.adoc[Schema queries]
+* Schema queries
+** xref:typeql::schema/define-types.adoc[Define]
+** xref:typeql::schema/define-rules.adoc[Undefine]
+//** xref:typeql::schema/modify.adoc[]
+//* xref:typeql::overview.adoc[Data queries]
+* Data queries
+//** xref:typeql::data/basic-patterns.adoc[]
+** xref:typeql::data/insert.adoc[Insert]
+** xref:typeql::data/delete.adoc[Delete]
+** xref:typeql::data/update.adoc[Update]
+** xref:typeql::data/advanced.adoc[Fetch]
+** xref:typeql::data/get.adoc[Get]
+* xref:typeql::grammar.adoc[Keyword reference]
