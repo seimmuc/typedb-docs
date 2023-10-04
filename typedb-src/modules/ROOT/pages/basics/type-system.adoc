@@ -1,0 +1,58 @@
+= Type system
+
+== Type
+
+A type for data is like a class for an object in OOP programming languages.
+A type is also a category for classification of data instances.
+All constraints defined for a type are applied for all instances of this type.
+Whenever we insert some data into a TypeDB database, we create instances of types,
+existing in the schema of the database.
+
+//types
+Type: :: A template for creating a data instance.
+
+A new type can be defined by subtyping an existing type.
+Subtype inherits constraints and properties of its supertype.
+Any type has exactly one supertype.
+
+A brand-new database with an empty schema has built-in root types: `entity`, `relation`, and `attribute`.
+All user-defined types in a schema are direct or indirect subtypes of these root types.
+
+include::typeql:ROOT:fundamentals.adoc[tag=entity_type_definition]
+
+include::typeql:ROOT:fundamentals.adoc[tag=relation_type_definition]
+
+include::typeql:ROOT:fundamentals.adoc[tag=attribute_type_definition]
+
+For more information on schema types, see the xref:typeql:ROOT:fundamentals.adoc#_types[Types] section on the
+xref:typeql:ROOT:fundamentals.adoc[] page of the xref:typeql:ROOT:overview.adoc[TypeQL] documentation.
+
+//rules
+Rules represent logic embedded in a schema.
+Rules are used by reasoning engine to infer new data, based on patterns, found in existing data.
+
+Rule: :: A combination of a condition and a conclusion, defined in a database schema
+         and used by the TypeDB reasoning engine to infer new data.
+
+For more information on rules, see the xref:typeql:ROOT:fundamentals.adoc#_rules[Rules] section on the
+xref:typeql:ROOT:fundamentals.adoc[] page of the xref:typeql:ROOT:overview.adoc[TypeQL] documentation.
+
+== Data
+//Instance of a type
+
+To insert any data in a TypeDB database, we instantiate a type, defined in a database's schema.
+All inserted data should be compliant with constraints from a schema of a database it is inserted to.
+Retrieving data from a database can result in getting values directly, but more often it includes dealing with concepts,
+returned by a TypeDB Driver through Driver API.
+
+//Concept
+Concept: :: Either a type or an instance of a type in a TypeDB database.
+
+TypeDB Driver API has methods to process concepts.
+For more information on Driver API concept methods, see the relevant Driver API reference:
+
+* xref:clients:ROOT:java/java-api-ref.adoc#_concept_methods[Java]
+* xref:clients:ROOT:python/python-api-ref.adoc#_concept_methods[Python]
+* xref:clients:ROOT:node-js/node-js-api-ref.adoc#_concept_methods[Node.js]
+
+//Value

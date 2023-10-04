@@ -1,0 +1,169 @@
+= Transactions
+
+All queries to a TypeDB database are performed through an open transaction.
+TypeDB transactions use snapshot isolation and optimistic concurrency control to support concurrent,
+lock-free read/write transactions.
+For more information, see the xref:basics/acid-guarantees.adoc[] page.
+
+There are two types of transactions in TypeDB: `read` and `write`.
+
+TypeDB Clients should use *READ* transactions for retrieving data or types.
+No data changes are possible with read transactions.
+Inference is possible only with read transactions.
+
+TypeDB Clients should use *WRITE* transactions for modifying data, but it is possible to retrieve data in them.
+All changes must be committed, or they will be lost upon closing the transaction.
+
+//#todo Implement a better color for marking (<mark>) ##
+////
+Write transactions are strict to a session type:
+
+* data can't be modified in a `schema` session;
+* schema can't be modified in a `data session`.
+////
+
+Use write transactions with:
+
+* `schema` session type to use Define and Undefine queries.
+* `data` session type to use Insert, Delete, and Update queries.
+
+While Get queries can be used in a write transaction, it's not recommended.
+For more information on write transactions blocks, read the
+xref:basics/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
+xref:basics/acid-guarantees.adoc[] page.
+
+To use inference, the `infer` transaction option should be enabled in a *read* transaction.
+
+You can open multiple transactions within the same session (except for a write transaction with a schema session).
+
+Transactions must be explicitly opened and closed by a TypeDB Client.
+
+[tabs]
+====
+TypeDB Console::
++
+--
+Open a transaction:
+[,bash]
+----
+transaction try-iam data write
+----
+
+Commit changes and close transaction:
+[,bash]
+----
+commit
+----
+
+Close transaction (without committing the changes):
+[,bash]
+----
+close
+----
+--
+
+TypeDB Studio::
++
+--
+Open a transaction:
+[,bash]
+----
+transaction try-iam data write
+----
+
+Commit changes and close transaction:
+[,bash]
+----
+commit
+----
+
+Close transaction (without committing the changes):
+[,bash]
+----
+close
+----
+--
+
+Rust::
++
+--
+[,rust]
+----
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+
+// commit changes and close transaction
+transaction.commit();
+
+// close transaction
+transaction.close();
+----
+--
+
+Python::
++
+--
+[,python]
+----
+# start transaction
+transaction = session.transaction(TransactionType.WRITE)
+
+# commit changes and close transaction
+transaction.commit()
+
+# close transaction
+transaction.close()
+----
+--
+
+Java::
++
+--
+[,java]
+----
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+
+// commit changes and close transaction
+transaction.commit();
+
+// close transaction
+transaction.close();
+----
+--
+
+Node.js::
++
+--
+[,js]
+----
+// start transaction
+const transaction = await session.transaction(TransactionType.WRITE);
+
+// commit changes and close transaction
+transaction.commit();
+
+// close transaction
+transaction.close();
+----
+--
+====
+
+For more information on how to control transactions in TypeDB Clients, see the documentation:
+
+* xref:clients:ROOT:studio.adoc#_transaction_control[TypeDB Studio]
+* xref:clients:ROOT:console.adoc#_transaction_querying_commands[TypeDB Console]
+* TypeDB Drivers:
+** xref:clients:ROOT:java/java-api-ref.adoc#_create_transaction[Java],
+** xref:clients:ROOT:python/python-api-ref.adoc#_create_transaction[Python],
+** xref:clients:ROOT:node-js/node-js-api-ref.adoc#_create_transaction[Node.js].
+
+== Time limit
+
+[IMPORTANT]
+====
+TypeDB transactions have a duration limit: *5 minutes* by default.
+====
+
+The time limit is intended to encourage short-lived transactions, prevent memory leaks
+caused by transactions that will not be completed, and terminate unresponsive transactions.

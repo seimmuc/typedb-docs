@@ -1,0 +1,795 @@
+= Connection
+:keywords: typedb, basics, connect, connection, session, database
+:longTailKeywords: typedb connection, typedb database, typedb session, typedb transaction, send query
+:pageTitle: Connection
+:summary: How to connect to TypeDB and send some queries.
+:tabs-sync-option:
+:experimental:
+
+This page describes how to connect to a TypeDB.
+For examples with different TypeDB Clients, see the <<_examples,Examples>> section below.
+
+== Overview
+//client
+To send a query to TypeDB, we need to do the following:
+
+. Establish a <<_network_connection,network connection>> between a TypeDB Client and a TypeDB server or cluster.
+. Open a <<_learn_session,session>> to a database.
+. Open a <<_learn_transaction,transaction>>.
+
+Every TypeDB Client can establish a network connection to a TypeDB server or cluster,
+open multiple sessions through the same network connection, and open multiple transactions through the same session.
+
+image::clients::concurrency-model.png[Session-transaction-query,link=self,width=100%]
+
+[#_network_connection]
+=== Network connection
+
+To establish a network connection to a TypeDB server or cluster,
+we need an address to connect to, including the port.
+The default port to connect to TypeDB is `1729`.
+
+[NOTE]
+====
+By default, TypeDB starts with settings to listen to any network interface.
+====
+
+Connecting to TypeDB Cloud or TypeDB Enterprise may require additional parameters,
+like user credentials, encryption parameters, etc.
+TypeDB Client connected to a cluster will perform server discovery to use all available servers in a cluster.
+
+//For clusters (available in Enterprise and Cloud editions) we also need username, password, and CA certificate for TLS.
+//TypeDB usually uses a single connection to a single TypeDB server or cluster.
+
+//session
+[#_learn_session]
+=== Session
+
+A session is like a tunnel connection to a database in a TypeDB server or cluster.
+To open a session, we need a database name and a session type.
+There are two types of sessions in TypeDB: `schema` and `data`.
+Use session types according to their names.
+A good principle to follow is for logically coherent transactions to be grouped into a single session.
+
+You can open more than one session to a database.
+You can read data and schema with any type of session,
+but to modify data or schema you must use the correct session type.
+To learn more about limitations on sessions and transactions, see the
+xref:basics/acid-guarantees.adoc#_schema_integrity[schema integrity,window=_blank] section.
+
+[NOTE]
+====
+Any TypeDB Client will regularly exchange internal signals with the server to keep the session alive when it's open.
+The default timeout is 30 seconds.
+It is recommended to avoid long-running sessions, because of possible network failures.
+====
+
+////
+For more information on how to open a session, see the xref:development/send-queries.adoc#_sessions[sessions]
+section on the xref:development/send-queries.adoc[] page.
+////
+
+//transaction
+[#_learn_transaction]
+=== Transaction
+
+To open a transaction, we need a transaction type: `read` or `write`.
+Optionally, you can set transaction options.
+//#todo Add to reference - Transaction options
+
+////
+For more information on how to open a transaction, see the xref:development/send-queries.adoc#_transactions[transactions]
+section on the xref:development/send-queries.adoc[] page.
+////
+Choose an appropriate session type and queries to write schema or data:
+
+[cols="^,^,^,^,^",options="header"]
+|===
+| Session type | Reading data | Writing data | Reading schema | Writing schema
+
+| DATA
+| Yes
+| Yes
+| Yes
+| *No*
+
+| SCHEMA
+| Yes
+| *No*
+| Yes
+| Yes
+|===
+//#todo Consider requesting designers to prepare beautiful Yes/No icons for visibility!
+
+[WARNING]
+====
+Transactions have a time limit of 5 minutes by default.
+====
+
+[#_examples]
+== Examples
+
+<<_examples,`concept`>>s
+
+`concept`.
+
+
+=== Manage databases
+
+This is an example of how to create and delete databases.
+Select a TypeDB Client below to see relevant instructions.
+
+[tabs]
+====
+TypeDB Console::
++
+--
+xref:clients::console.adoc[TypeDB Console] provides CLI to manage databases and send queries.
+
+Use the following command to start TypeDB Console and connect it to a TypeDB Core server:
+
+.TypeDB Core
+[,bash]
+----
+typedb console --server=127.0.0.1:1729
+----
+
+.TypeDB Cloud or TypeDB Enterprise
+[,bash]
+----
+typedb console --cluster=127.0.0.1:1729 --username=admin --password --tls-enabled=true --tls-root-ca=<path>
+----
+
+Where `admin` is a username to connect with, and `<path>` is a placeholder for a path to the encryption certificate.
+
+Try the following commands in TypeDB Console prompt:
+[,bash]
+----
+# create database
+database create test-db
+# get database schema
+database schema test-db
+# list all databases
+database list
+# delete database
+database delete test-db
+----
+--
+
+TypeDB Studio::
++
+--
+xref:clients::studio.adoc[TypeDB Studio] provides GUI to manage databses and send queries.
+
+Start TypeDB Studio and follow the steps below:
+
+include::clients::studio.adoc[tag=connect]
+
+include::clients::studio.adoc[tag=cluster-connect]
+
+include::clients::studio.adoc[tag=create-db]
+
+The same window can be used to list all databases and to delete any of existing databases.
+To delete a database, click on a Delete button with a red bin icon in the line of the database to delete in the list.
+--
+
+Rust::
++
+--
+.TypeDB Rust Driver database management example
+[,rust]
+----
+// create database
+client.databases().create("test-db");
+// get database schema
+client.databases().get("test-db").schema();
+// get all databases
+client.databases().all();
+// check if database exists
+client.databases().contains("test-db");
+// delete database
+client.databases().get("test-db").delete();
+----
+--
+
+Python::
++
+--
+TypeDB Python Driver provides xref:clients::python/python-api-ref.adoc[Driver API]
+methods to connect to TypeDB, manage databases, and send queries.
+
+.TypeDB Python Driver database management example
+[,python]
+----
+with TypeDB.core_client("127.0.0.1:1729") as client:
+    # create database
+    client.databases().create("test-db")
+    # get database schema
+    client.databases().get("test-db").schema()
+    # get all databases
+    client.databases().all()
+    # check if database exists
+    client.databases().contains("test-db")
+    # delete database
+    client.databases().get("test-db").delete()
+----
+--
+
+Java::
++
+--
+TypeDB Java Driver provides xref:clients::java/java-api-ref.adoc[Driver API]
+methods to connect to TypeDB, manage databases, and send queries.
+
+.TypeDB Java Driver database management example
+[,java]
+----
+TypeDBClient client = TypeDB.coreClient("127.0.0.1:1729");
+
+// create database
+client.databases().create("test-db");
+// get database schema
+client.databases().get("test-db").schema();
+// get all databases
+client.databases().all();
+// check if database exists
+client.databases().contains("test-db");
+// delete database
+client.databases().get("test-db").delete();
+----
+--
+
+Node.js::
++
+--
+TypeDB Node.Js Driver provides xref:clients::node-js/node-js-api-ref.adoc[Driver API]
+methods to connect to TypeDB, manage databases, and send queries.
+
+.TypeDB Node.js Driver database management example
+[,js]
+----
+client = TypeDB.coreClient("127.0.0.1:1729");
+
+// create database
+await client.databases().create("test-db");
+// get database schema
+await client.databases().get("test-db").schema();
+// get all databases
+await client.databases().all();
+// check if database exists
+await client.databases().contains("test-db");
+// delete database
+await (await client.databases().get("test-db")).delete();
+----
+--
+====
+
+=== Send a query
+
+[tabs]
+====
+TypeDB Console::
++
+--
+Use the following steps:
+
+1. Connect to TypeDB:
++
+[,bash]
+----
+typedb console --server=127.0.0.1:1729
+----
+
+2. Open a transaction:
++
+[,bash]
+----
+transaction try-iam data write
+----
+
+3. Copy the following TypeQL query and paste it in the prompt:
++
+[,bash]
+----
+insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";
+----
+
+4. Press btn:[Enter] _twice_ to send the query.
+
+5. Commit changes:
++
+[,bash]
+----
+commit
+----
+--
+
+TypeDB Studio::
++
+--
+
+--
+
+Rust::
++
+--
+[,rust]
+----
+// prepare queries
+String insertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+transaction.query().insert(insertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+
+Python::
++
+--
+[,python]
+----
+# prepare queries
+insert_query = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";'
+
+# start transaction
+transaction = session.transaction(TransactionType.WRITE)
+transaction.query().insert(insert_query)
+
+# commit changes
+transaction.commit()
+----
+--
+
+Java::
++
+--
+[,java]
+----
+// prepare queries
+String insertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+transaction.query().insert(insertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+
+Node.js::
++
+--
+[,js]
+----
+// prepare queries
+let InsertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+const transaction = await session.transaction(TransactionType.WRITE);
+transaction.query().insert(InsertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+====
+
+
+
+
+
+////
+
+// ---------------------------
+
+[#_clients]
+== Clients
+
+TypeDB accepts remote connections from xref:clients::clients.adoc[TypeDB Clients].
+
+Choose a TypeDB Client below to see how to connect using it.
+
+[tabs]
+=====
+TypeDB Console::
++
+--
+xref:clients::console.adoc[TypeDB Console] provides CLI and requires to explicitly open a session and a transaction
+to send a query.
+
+Use the following command to start TypeDB Console and connect it to a TypeDB Core server:
+[,bash]
+----
+typedb console --server=127.0.0.1:1729
+----
+
+To connect to a TypeDB Cloud or a TypeDB Enterprise cluster, use the following command instead:
+[,bash]
+----
+typedb console --cluster=127.0.0.1:1729 --username=<username> --password --tls-enabled=true --tls-root-ca=<path>
+----
+
+For more information on connection parameters and command line arguments, see the xref:clients::console.adoc[] page.
+--
+
+TypeDB Studio::
++
+--
+xref:clients::studio.adoc[TypeDB Studio] provides GUI and automates session and transaction management,
+but most other TypeDB Clients require manual (explicit) control over sessions and transactions.
+
+include::clients::studio.adoc[tag=connect]
+
+include::clients::studio.adoc[tag=cluster-connect]
+
+For more information on connection parameters and GUI options, see the xref:clients::studio.adoc[] page.
+--
+
+Rust::
++
+--
+TypeDB Rust Driver provides xref:clients::rust/rust-api-ref.adoc[Driver API]
+methods to connect to TypeDB and send queries.
+
+.TypeDB Core server connection example
+[,rust]
+----
+TypeDBClient client = TypeDB.coreClient("127.0.0.1:1729");
+----
+
+////
+
+////
+.TypeDB Cloud and TypeDB Enterprise cluster connection example
+[,rust]
+----
+TypeDBClient client = TypeDB.coreClient("127.0.0.1:1729");
+TypeDB.clusterClient("127.0.0.1:1729", TypeDBCredential credential, int parallelisation);
+----
+////
+//#todo Create, test, and add here a proper cluster connection example
+
+////
+For more information on how to connect to a TypeDB Cloud or a TypeDB Enterprise cluster, see the
+xref:clients::rust/rust-api-ref.adoc#_instantiating_a_typedb_cluster_client[Cluster client] section in the
+xref:clients::rust/rust-api-ref.adoc[Rust Driver API] page.
+
+[NOTE]
+====
+When using TypeDB Drivers, we recommended instantiating a single client object per an instance of an application.
+====
+--
+
+Python::
++
+--
+TypeDB Python Driver provides xref:clients::python/python-api-ref.adoc[Driver API]
+methods to connect to TypeDB and send queries.
+
+.TypeDB Core server connection example
+[,python]
+----
+client = TypeDB.core_client("127.0.0.1:1729")
+----
+
+For more information on how to connect to a TypeDB Cloud or a TypeDB Enterprise cluster, see the
+xref:clients::python/python-api-ref.adoc#_instantiating_a_typedb_cluster_client[Cluster client] section in the
+xref:clients::python/python-api-ref.adoc[] page.
+
+[NOTE]
+====
+When using TypeDB Drivers, we recommended instantiating a single client object per an instance of an application.
+====
+--
+
+Java::
++
+--
+TypeDB Java Driver provides xref:clients::java/java-api-ref.adoc[Driver API]
+methods to connect to TypeDB and send queries.
+
+.TypeDB Core server connection example
+[,java]
+----
+TypeDBClient client = TypeDB.coreClient("127.0.0.1:1729");
+----
+////
+
+////
+.TypeDB Cloud and TypeDB Enterprise cluster connection example
+[,java]
+----
+TypeDBClient client = TypeDB.coreClient("127.0.0.1:1729");
+TypeDB.clusterClient("127.0.0.1:1729", TypeDBCredential credential, int parallelisation);
+----
+////
+//#todo Create, test, and add here a proper cluster connection example
+
+////
+For more information on how to connect to a TypeDB Cloud or a TypeDB Enterprise cluster, see the
+xref:clients::java/java-api-ref.adoc#_instantiating_a_typedb_cluster_client[Cluster client] section in the
+xref:clients::java/java-api-ref.adoc[] page.
+
+[NOTE]
+====
+When using TypeDB Drivers, we recommended instantiating a single client object per an instance of an application.
+====
+--
+
+Node.js::
++
+--
+TypeDB Node.Js Driver provides xref:clients::node-js/node-js-api-ref.adoc[Driver API]
+methods to connect to TypeDB and send queries.
+
+.TypeDB Core server connection example
+[,js]
+----
+client = TypeDB.coreClient("127.0.0.1:1729");
+----
+
+For more information on how to connect to a TypeDB Cloud or a TypeDB Enterprise cluster, see the
+xref:clients::node-js/node-js-api-ref.adoc#_instantiating_a_typedb_cluster_client[Cluster client] section in the
+xref:clients::node-js/node-js-api-ref.adoc[] page.
+
+[NOTE]
+====
+When using TypeDB Drivers, we recommended instantiating a single client object per an instance of an application.
+====
+--
+=====
+
+[#_protocol_version]
+=== Protocol version control
+
+A connection from an incompatible version of TypeDB Client gets denied by TypeDB to prevent any potential communication
+errors.
+
+[IMPORTANT]
+====
+In the `2.18.0` version of TypeDB, the TypeDB protocol has version number `1`.
+====
+
+For backward compatibility protocol version control will allow TypeDB Clients versions prior to `2.18.0` (i.e., with
+protocol version `N/A` or `< 1`) to connect with a TypeDB server with protocol version `1`.
+////
+
+////
+[NOTE]
+====
+Connecting to an older server (prior to version `2.18.0`) with a newer client
+produces an error due to the older server lacking the API to check the protocol version.
+====
+////
+
+////
+To check the TypeDB protocol versions, see the Compatibility tables on the installation pages of TypeDB Clients:
+
+* xref:clients::studio.adoc#_version_compatibility[TypeDB Studio]
+* xref:clients::console.adoc#_version_compatibility[TypeDB Console]
+* xref:clients::java/java-install.adoc#_version_compatibility[TypeDB Driver Java]
+* xref:clients::python/python-install.adoc#_version_compatibility[TypeDB Driver Python]
+* xref:clients::node-js/node-js-install.adoc#_version_compatibility[TypeDB Driver Node.js]
+
+[#_databases]
+== Databases
+
+A TypeDB Client can connect to multiple databases, but every session is bound to a particular database.
+
+To manage databases on a TypeDB server or cluster, a TypeDB Client requires no session.
+Choose a TypeDB Client below to see how to manage databases.
+
+//#todo Update all Rust code in this page with the real one!
+[tabs]
+====
+TypeDB Console::
++
+--
+Use the following commands in TypeDB Console prompt:
+[,bash]
+----
+# create database
+database create test-db
+# get database schema
+database schema test-db
+# list all databases
+database list
+# delete database
+database delete test-db
+----
+--
+
+TypeDB Studio::
++
+--
+include::clients::studio.adoc[tag=create-db]
+
+The same window can be used to list all databases and to delete any of existing databases.
+To delete a database, click on a Delete button with a red bin icon in the line of the database to delete in the list.
+--
+
+Rust::
++
+--
+.TypeDB Rust Driver database management example
+[,rust]
+----
+// create database
+client.databases().create("test-db");
+// get database schema
+client.databases().get("test-db").schema();
+// get all databases
+client.databases().all();
+// check if database exists
+client.databases().contains("test-db");
+// delete database
+client.databases().get("test-db").delete();
+----
+--
+
+Python::
++
+--
+.TypeDB Python Driver database management example
+[,python]
+----
+# create database
+client.databases().create("test-db")
+# get database schema
+client.databases().get("test-db").schema()
+# get all databases
+client.databases().all()
+# check if database exists
+client.databases().contains("test-db")
+# delete database
+client.databases().get("test-db").delete()
+----
+--
+
+Java::
++
+--
+.TypeDB Java Driver database management example
+[,java]
+----
+// create database
+client.databases().create("test-db");
+// get database schema
+client.databases().get("test-db").schema();
+// get all databases
+client.databases().all();
+// check if database exists
+client.databases().contains("test-db");
+// delete database
+client.databases().get("test-db").delete();
+----
+--
+
+Node.js::
++
+--
+.TypeDB Node.js Driver database management example
+[,js]
+----
+// create database
+await client.databases().create("test-db");
+// get database schema
+await client.databases().get("test-db").schema();
+// get all databases
+await client.databases().all();
+// check if database exists
+await client.databases().contains("test-db");
+// delete database
+await (await client.databases().get("test-db")).delete();
+----
+--
+====
+
+[#_sessions]
+== Sessions
+TypeDB Clients should use `data` sessions for data operations and `schema` sessions for schema operations.
+
+You can open multiple sessions with the same client (network connection).
+
+[WARNING]
+====
+Only one session of the `schema` type can be open at any time.
+An open `schema` session blocks any attempt to open a `write` <<_transactions,transaction>> even in `data` sessions.
+
+For more information on these limitations,
+see the xref:basics/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
+xref:basics/acid-guarantees.adoc[] page.
+====
+
+Sessions must be explicitly opened and closed by a TypeDB Client.
+
+[tabs]
+=====
+TypeDB Console::
++
+--
+In TypeDB Console we open a session and a transaction with a single command from TypeDB Console prompt:
+
+[,bash]
+----
+transaction iam data read
+----
+--
+
+TypeDB Studio::
++
+--
+Session management is automated, choose a session type in the toolbar `schema`/`data` switch.
+--
+
+Rust::
++
+--
+[,rust]
+----
+TypeDBSession session = client.session("try-iam", TypeDBSession.Type.DATA);
+----
+--
+
+Python::
++
+--
+[,python]
+----
+session = client.session("try-iam", SessionType.DATA)
+----
+--
+
+Java::
++
+--
+[,java]
+----
+TypeDBSession session = client.session("try-iam", TypeDBSession.Type.DATA);
+----
+--
+
+Node.js::
++
+--
+[,js]
+----
+session = await client.session("try-iam", SessionType.DATA);
+----
+--
+=====
+
+//#todo Move this into the tabs
+For more information on how to manage sessions with different TypeDB Clients, see the
+xref:clients::clients.adoc[Clients] documentation:
+
+* xref:clients:ROOT:studio.adoc#_transaction_control[TypeDB Studio]
+* xref:clients:ROOT:console.adoc#_database_management_commands[TypeDB Console]
+* TypeDB Drivers:
+** xref:clients:ROOT:java/java-api-ref.adoc#_session_create[Java],
+** xref:clients:ROOT:python/python-api-ref.adoc#_session_create[Python],
+** xref:clients:ROOT:node-js/node-js-api-ref.adoc#_session_create[Node.js].
+
+An open session lets you open a <<_transactions,transaction>>.
+
+
+=== Best practices
+
+* Avoid long-running transactions which can result in conflicts and resource contention.
+* Transactions should group logically coherent queries.
+
+For more advice and *best practices*, visit the xref:development/best-practices.adoc[Best practices] page.
+
+== Learn more
+
+With the essential knowledge of the *Fundamentals* section and the ability to connect to a TypeDB databases, described
+on this page, let's try defining our own xref:development/define-schema.adoc[schema].
+
+After that, try xref:development/write-data.adoc[writing] and xref:development/read-data.adoc[reading] data from
+a database with your schema.
+////

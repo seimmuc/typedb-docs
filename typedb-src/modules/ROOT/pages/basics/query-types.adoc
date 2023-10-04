@@ -1,0 +1,155 @@
+= Queries
+
+All queries to a TypeDB database are written in TypeQL.
+TypeQL is a *fully declarative* query language that can be used as both
+https://en.wikipedia.org/wiki/Data_definition_language[DDL] and
+https://en.wikipedia.org/wiki/Data_manipulation_language[DML].
+
+include::typeql:ROOT:queries.adoc[tag=queries_table]
+
+For more information on query types, read the xref:typeql:ROOT:queries.adoc[] page.
+
+//There are different ways to send a query to a TypeDB database, depending on what TypeDB Client is used.
+//For more information on how to send a query, see the xref:typedb::development/send-queries.adoc[] page.
+
+== Pattern matching
+
+TypeDB xref:typeql:ROOT:fundamentals/queries.adoc[queries] are written in xref:typeql:ROOT:overview.adoc[TypeQL]
+and use *patterns* to manipulate schema and data of a database.
+
+A pattern is a set of statements.
+By default, conjunction combines all statements.
+Disjunction and negation can be used explicitly.
+
+=== Pattern example
+
+image::example-pattern.png[Complex example]
+
+The pattern is a conjunction of five different pattern types:
+
+. *Conjunction 1* specifies the variables for two `person` instances, their `full-names`, `action`, and `file` that
+  has path `README.md`, specifies their types.
+. *Disjunction* specifies that the actions of interest are either `modify_file` or `view_file`.
+. *Negation 1* specifies that person `$p1` shall not have `full-name` with value of `Masako Holley`.
+. *Negation 2* specifies that person `$p2` shall not have `full-name` with value of `Masako Holley`.
+. *Conjunction 2* specifies that the `file` has `access` with the `action` that we specified earlier,
+  and both instances of the `person` to have the `permission` to the specified `access`.
+
+In short, the above example finds pairs of people who both have permission to access the same file
+with a path of `README.md`. The pattern additionally specifies the access to be either `modify_file` or `view_file`,
+and neither people to have the full-name `Masako Holley`.
+
+// --------
+
+== Query example
+
+The following examples are using IAM database schema, that we defined in the
+xref:home/quickstart-guide.adoc#_define_a_schema_from_a_file[Quickstart guide].
+
+[tabs]
+====
+TypeDB Console::
++
+--
+Use the following steps:
+
+1. Open a transaction:
++
+[,bash]
+----
+transaction try-iam data write
+----
+
+2. Copy the following TypeQL query:
++
+[,bash]
+----
+insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";
+----
+
+3. Press btn:[Enter] twice to send the query: +
+* The first pressing will start a new line for the query.
+* Pressing btn:[Enter] on an empty line will send the query.
+
+4. Commit changes:
++
+[,bash]
+----
+commit
+----
+--
+
+TypeDB Studio::
++
+--
+
+--
+
+Rust::
++
+--
+[,rust]
+----
+// prepare queries
+String insertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+transaction.query().insert(insertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+
+Python::
++
+--
+[,python]
+----
+# prepare queries
+insert_query = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";'
+
+# start transaction
+transaction = session.transaction(TransactionType.WRITE)
+transaction.query().insert(insert_query)
+
+# commit changes
+transaction.commit()
+----
+--
+
+Java::
++
+--
+[,java]
+----
+// prepare queries
+String insertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+TypeDBTransaction transaction = session.transaction(TypeDBTransaction.Type.WRITE);
+transaction.query().insert(insertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+
+Node.js::
++
+--
+[,js]
+----
+// prepare queries
+let InsertQuery = 'insert $x isa person, has full-name "Bob", has email "bob@vaticle.com";';
+
+// start transaction
+const transaction = await session.transaction(TransactionType.WRITE);
+transaction.query().insert(InsertQuery);
+
+// commit changes
+transaction.commit();
+----
+--
+====

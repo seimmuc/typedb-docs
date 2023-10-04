@@ -1,0 +1,32 @@
+= What is TypeDB?
+
+TypeDB is a polymorphic database with a conceptual data model, a strong subtyping system, a symbolic reasoning engine,
+and a beautiful and elegant type-theoretic language: TypeQL.
+
+== Solve object-relational mismatch
+
+Object-relational mismatch has plagued engineers since OOP became dominant.
+Relational databases were never built to contend with object models and cannot model inheritance.
+Both document and graph databases struggle to represent data outside their niches,
+while multi-model databases do little to solve the fundamental mismatch problem.
+In all contemporary databases, the focus is on storage format rather than the abstract model itself.
+TypeDB is unique in implementing conceptual data models without forcing them into predefined structures.
+
+== Data model extendability
+
+Extending a database often involves lengthy migration processes in which queries and application code have to be
+refactored.
+This involves reconciling the disparate structures between datasets and constructing a new data model that
+captures the polymorphism, leading to breaking changes in your code.
+Migration to a new model obsoletes existing queries, introduces new fields to existing objects,
+and changes the type signature of query results.
+TypeDB’s polymorphism enables you to extend your model without refactoring queries, migrating data, or modifying code.
+
+== Data consistency without redundancy
+
+Resolving complex dependencies in data requires intricate combinations of query patterns that are computationally
+intensive to run.
+Precomputing data is often the only practical solution.
+This leads to stale, inconsistent, and incorrect data, creating problems when real-time, accurate data is critical.
+TypeDB’s symbolic rules infer new data at query time, eliminating delay in synchronization.
+This ensures real-time access to consistent data backed by a single source of truth, avoiding data redundancy.

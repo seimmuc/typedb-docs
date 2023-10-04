@@ -12,8 +12,8 @@ We also have xref:typeql::overview.adoc[TypeQL] and xref:clients::clients.adoc[T
 
 * xref:introduction.adoc[] -- a brief description of TypeDB capabilities
 * xref:install-and-run.adoc[] -- install and run a local deployment or deploy in TypeDB Cloud
-* xref:quickstart-guide.adoc[] -- a step-by-step guide on setting up a working environment
-* xref:development/learn-basics.adoc[] -- essential knowledge, required to use TypeDB
+* xref:home/quickstart-guide.adoc[] -- a step-by-step guide on setting up a working environment
+* xref:basics/basics.adoc[] -- essential knowledge, required to use TypeDB
 
 [#_developing_with_typedb]
 ==  Developing with TypeDB
@@ -24,7 +24,7 @@ We also have xref:typeql::overview.adoc[TypeQL] and xref:clients::clients.adoc[T
 * xref:development/read-data.adoc[] -- Get query usage guide
 * xref:development/infer-data.adoc[] -- inference usage guide
 * xref:development/best-practices.adoc[] -- schema and query designing tips, troubleshooting
-* xref:development/acid-guarantees.adoc[] -- atomicity, consistency, isolation, and durability guarantees
+* xref:basics/acid-guarantees.adoc[] -- atomicity, consistency, isolation, and durability guarantees
 
 [#_managing_typedb]
 == Managing TypeDB
@@ -94,12 +94,12 @@ xref:install-and-run.adoc[installation guide]
 to install a local server or deploy to TypeDB Cloud.
 
 Then use our
-xref:quickstart-guide.adoc[]
+xref:home/quickstart-guide.adoc[]
 for hands-on experience: create your first database and try some queries.
 
 Upon setting up a working TypeDB environment, we recommend to explore the following documentation subsections:
 
-* xref:development/learn-basics.adoc[] -- compressed essential knowledge about TypeDB;
+* xref:basics/basics.adoc[] -- compressed essential knowledge about TypeDB;
 * <<_developing_with_typedb,Developing with TypeDB>> section -- how-to guides to database connection, queries and best practice;
 * <<_managing_typedb,Managing TypeDB>> section -- configuring local and TypeDB Cloud deployments;
 * <<_tutorials,Tutorials>> section -- tutorials, how-to guides, and the xref:tutorials/iam-schema.adoc[].

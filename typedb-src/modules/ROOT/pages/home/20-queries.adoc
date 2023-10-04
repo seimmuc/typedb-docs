@@ -1,0 +1,71 @@
+= TypeDB in 20 queries
+:toc: macro
+:toclevels: 5
+:toc-title: Top query examples:
+
+To showcase at least some capabilities of TypeDB and its query language TypeQL,
+see below a curated list of example queries designed to give a brief idea of what can be done and how easy it is.
+
+toc::[]
+
+== First-class citizen ERA
+
+== Composable patterns
+
+Basic match
+
+Introduce more constraints
+
+== Match-insert
+
+== Match-delete
+
+== Type inheritance
+
+== Polymorphic queries
+
+== Extending the schema
+
+Sub-typing
+
+Adding a role-player
+
+Adding attributes to entities
+
+etc...
+
+== Abstract and overriding
+
+== Relations
+
+=== n-ary
+
+=== Nested
+
+=== Variadic
+
+== Globally unique attributes
+
+== Attribute constraints
+
+Regex
+
+=== Annotations
+
+Key, Unique
+
+== Arithmetic expressions
+
+=== Other built-in functions
+
+== Inference
+
+=== Rules chaining
+
+=== Transitivity
+
+== Schema modifications
+
+=== TypeQL
+
+=== TypeDB Driver API

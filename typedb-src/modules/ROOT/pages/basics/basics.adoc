@@ -1,0 +1,78 @@
+= Basics
+:keywords: typedb, basics, connect, connection, session, database
+:longTailKeywords: basic concepts of typedb, typedb connection, typedb database, typedb session
+:pageTitle: Connecting
+:summary: Brief description of connection to TypeDB.
+:tabs-sync-option:
+
+This page explains basic TypeDB terminology and operations required for anyone to continue learning how to use TypeDB.
+
+== TypeDB
+
+TypeDB is a polymorphic database with a conceptual data model, a strong subtyping system, a symbolic reasoning engine,
+and a beautiful and elegant type-theoretic language: TypeQL.
+
+TypeQL: :: Declarative query language.
+
+//What is TypeDB
+TypeDB: :: A transactional DBMS with queries in TypeQL.
+//TypeDB is a transactional DBMS with xref:typedb::basics/acid-guarantees.adoc[].
+
+//TypeDB editions
+There are three editions of TypeDB: TypeDB Cloud, TypeDB Enterprise, and TypeDB Core.
+All editions support the same set of query types and the same TypeQL syntax.
+TypeDB Core can only be used for deploying standalone servers of TypeDB.
+While other editions support clustering, replicating, load-balancing, encryption, and other enterprise features.
+
+For more information on TypeDB editions comparison, see the https://typedb.com/deploy[Deploy] page of our website.
+
+=== TypeDB Clients
+
+//client-server architecture
+//client role
+TypeDB uses https://github.com/vaticle/typedb-protocol[TypeDB protocol], based on https://grpc.io/[gRPC],
+to communicate queries and responses with TypeDB Clients.
+TypeDB Clients are capable of connecting to a TypeDB server or cluster, validating and sending a query,
+and retrieving an answer.
+
+TypeDB Client: :: Any software capable of communicating with TypeDB through the TypeDB protocol.
+
+A TypeDB Client can be built with an existing library that implements TypeDB Protocol and provides a native API
+for interacting with TypeDB, queries, and answers.
+We call such a library a TypeDB Driver.
+
+TypeDB Driver: :: A language-specific library that implements the TypeDB protocol and provides a TypeDB Driver API.
+
+TypeDB Drivers are also classified as TypeDB Clients, and used to create other TypeDB Clients, such as
+xref:clients:ROOT:studio.adoc[TypeDB Studio,window=_blank] and
+xref:clients:ROOT:console.adoc[TypeDB Console,window=_blank].
+
+image::clients::client-server-comms.png[client-server, width=50%, link=self]
+
+== Database
+
+//database data separation
+TypeDB stores data in databases.
+Every database has a name and consists of schema and data.
+Schema is like a blueprint of data in a database.
+One can define constraints on data and rules for reasoning in a schema.
+
+Database: :: A named container for data with a schema.
+
+Schema: :: A database schema is a full set of definitions for all types and rules used in the database.
+
+A TypeDB server/cluster can store multiple databases, but is optimized for a small number of databases per server/cluster.
+It is best to keep the number of databases in any given installation **under 10**.
+
+For more information on how to create and manage databases, see the
+xref:development/send-queries.adoc#_databases[Databases] section on the
+xref:development/send-queries.adoc[] page.
+
+//storage
+//Physical persistent storage is implemented with https://www.speedb.io/[SpeedDB].
+
+== Learn more
+
+We recommend continuing your TypeDB journey by going through the rest of the *Basics* section:
+
+include::typedb::partial$nav.adoc[tag=basics]

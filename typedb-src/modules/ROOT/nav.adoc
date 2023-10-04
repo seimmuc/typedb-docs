@@ -5,7 +5,7 @@ include::typedb::partial$nav.adoc[]
 
 include::typeql::partial$nav.adoc[]
 
-include::clients::partial$nav.adoc[]
+include::2.x@clients::partial$nav.adoc[]
 ////
 // TypeDB
 * xref:overview.adoc[]
@@ -14,7 +14,7 @@ include::clients::partial$nav.adoc[]
 * xref:quickstart-guide.adoc[]
 
 * Developing with TypeDB
-** xref:development/learn-basics.adoc[]
+** xref:development/basics.adoc[]
 ** xref:development/send-queries.adoc[]
 ** xref:development/define-schema.adoc[]
 ** xref:development/write-data.adoc[]

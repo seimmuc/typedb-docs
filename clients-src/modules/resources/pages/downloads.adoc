@@ -6,10 +6,16 @@
 :tabs-sync-option:
 :repo: https://github.com/vaticle/typedb-studio/releases/
 
+// tag::clients-downloads[]
 == TypeDB Console
 
 TypeDB Console is distributed with both TypeDB Core and TypeDB Enterprise.
 
+Check your distributive of TypeDB for a
+xref:clients::console.adoc#_version_compatibility[compatible] version of TypeDB Console.
+Alternatively, xref:typedb:resources:download-center.adoc#_typedb_core[download] TypeDB with TypeDB Console inside.
+
+////
 Make sure to download an archive with keyword `all` in its name: xref:typedb:resources:releases.adoc[Download]
 TypeDB and find TypeDB Console in the same archive.
 
@@ -17,12 +23,6 @@ TypeDB and find TypeDB Console in the same archive.
 ====
 There is also a *server-only* version available for download from the
 https://github.com/vaticle/typedb/releases[GitHub,window=_blank]. It has `server` keyword instead of `all` in its name.
-====
-
-////
-[NOTE]
-====
-Make sure not to download server only version: the archive should have the keyword `all` in its name.
 ====
 ////
 
@@ -100,3 +100,4 @@ xref:clients::node-js/node-js-install.adoc#_version_compatibility[version compat
 https://github.com/vaticle/typedb-client-nodejs/releases/[release notes,window=_blank].
 --
 ====
+// end::clients-downloads[]

@@ -11,7 +11,7 @@ and a beautiful and elegant type-theoretic language: TypeQL.
 
 == Short summary
 
-TypeDB is a transactional DBMS with xref:development/acid-guarantees.adoc[] that has the following main features:
+TypeDB is a transactional DBMS with xref:basics/acid-guarantees.adoc[] that has the following main features:
 
 * TypeDB uses an enhanced Entity-Relationship model, extended with Attributes as first-class citizens;
 * TypeDB has its own special static type system, supporting user-defined types with subtyping and inheritance,
@@ -295,7 +295,7 @@ Windows, Linux, and macOS builds.
 
 . Install TypeDB locally with the xref:install-and-run.adoc[Installation guide] or deploy it in the
   https://cloud.typedb.com/[TypeDB Cloud].
-. Create a database and try some queries with the xref:quickstart-guide.adoc[Quickstart guide].
-. Learn only essentials about TypeDB with the xref:development/learn-basics.adoc[] page.
+. Create a database and try some queries with the xref:home/quickstart-guide.adoc[Quickstart guide].
+. Learn only essentials about TypeDB with the xref:basics/basics.adoc[] page.
 . Learn more about connecting to a database, querying, and troubleshooting in our *Developing with TypeDB* subsection.
 . Prepare a production environment with the *Managing TypeDB* subsection.

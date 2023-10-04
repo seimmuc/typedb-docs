@@ -317,8 +317,8 @@ Only one session of the `schema` type can be open at any time.
 An open `schema` session blocks any attempt to open a `write` <<_transactions,transaction>> even in `data` sessions.
 
 For more information on these limitations,
-see the xref:development/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
-xref:typedb::development/acid-guarantees.adoc[] page.
+see the xref:basics/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
+xref:basics/acid-guarantees.adoc[] page.
 ====
 
 Sessions must be explicitly opened and closed by a TypeDB Client.
@@ -398,7 +398,7 @@ An open session lets you open a <<_transactions,transaction>>.
 All queries to a TypeDB database are performed through an open transaction.
 TypeDB transactions use snapshot isolation and optimistic concurrency control to support concurrent,
 lock-free read/write transactions.
-For more information, see the xref:development/acid-guarantees.adoc[] page.
+For more information, see the xref:basics/acid-guarantees.adoc[] page.
 
 There are two types of transactions in TypeDB: `read` and `write`.
 
@@ -424,8 +424,8 @@ Use write transactions with:
 
 While Get queries can be used in a write transaction, it's not recommended.
 For more information on write transactions blocks, read the
-xref:typedb::development/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
-xref:typedb::development/acid-guarantees.adoc[] page.
+xref:basics/acid-guarantees.adoc#_schema_integrity[schema integrity] section on the
+xref:basics/acid-guarantees.adoc[] page.
 
 To use inference, the `infer` transaction option should be enabled in a *read* transaction.
 
@@ -568,7 +568,7 @@ caused by transactions that will not be completed, and terminate unresponsive tr
 //#todo Add Send query section to the page structure!
 
 The following examples are using IAM database schema, that we defined in the
-xref:typedb::quickstart-guide.adoc#_define_a_schema_from_a_file[Quickstart guide].
+xref:home/quickstart-guide.adoc#_define_a_schema_from_a_file[Quickstart guide].
 
 [tabs]
 ====
