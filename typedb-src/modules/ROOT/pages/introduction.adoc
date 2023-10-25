@@ -17,62 +17,51 @@ xref:development/connect.adoc#_acid_guarantees[ACID guarantees],
 a robust asynchronous native API based on gRPC, and
 a specialized IDE (xref:clients::studio.adoc[TypeDB Studio]).
 
-== What makes TypeDB special
+We crafted TypeDB following a completely new, highly expressive *database paradigm* based on four key components:
 
-We built TypeDB on a completely new, highly expressive database paradigm.
+* <<_data_model>>
+* <<_type_system>>
+* <<_typeql>>
+* <<_inference_engine>>
 
-* <<_pera,TypeDB is based on a polymorphic data model>>.
+[#_data_model]
+== Polymorphic database model
 
-TypeDB implements the Polymorphic Entity-Relation-Attribute (<<_pera,PERA>>) model, which allows schemas
-to be built directly from the conceptual models that people use to represent domains and their data.
+TypeDB is based on a polymorphism-enhanced *conceptual* data model.
+Conceptual data models are the starting point of designing any complex database application:
+they are high-level models
+that describe domains and their structured data in terms of conceptual entities and relations,
+readable attributes, as well as the data dependencies between them.
+Enhancing conceptual data models with inheritance and interface polymorphism gives them the further capability
+of expressing concept abstractions and dependency abstractions.
 
-As a truly polymorphic database,
-TypeDB has a number of unique capabilities not natively attainable with other database paradigms.
+TypeDB implements the *Polymorphic Entity-Relation-Attribute* (<<_pera,PERA>>) model,
+an extension of https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model[Chen’s entity-relationship (ER) model].
+The PERA model allows database schemas
+to be built directly from the conceptual models used frequently to represent domains and their data.
+By enhancing these models with polymorphism,
+TypeDB can avoid a long list of cumbersome workarounds and hacks needed when working with other data models.
 
-Data is queried with high-level patterns, in which any element can be variablized.
-Queries are analyzed by the type inference engine before going to the query planner.
-It resolves polymorphism by identifying possible types that could fit patterns as defined by the schema,
-and queries return instances of all those types.
+See the <<_pera>> below.
 
-* <<_declarative,TypeDB features highly expressive and fully declarative query language: TypeQL>>.
-
-All queries for TypeDB are written using <<_declarative,TypeQL>>, its type-theoretic query language,
-that can be used as both
-https://en.wikipedia.org/wiki/Data_definition_language[Data Definition Language,window=_blank] and
-https://en.wikipedia.org/wiki/Data_manipulation_language[Data Manipulation Language,window=_blank].
-TypeQL natively models and implements complex object-oriented features like abstraction, inheritance, and polymorphism.
-With these capabilities, TypeQL enables engineers to work with flexible and adaptable data models,
-making it easier to manage, query, and reason over complex data structures.
-
-TypeQL’s type-theoretic schemas allow for perfect parity with object models.
-Constructs that can be challenging to model natively in other databases are simple and intuitive in TypeDB.
-
-* <<_infer,TypeDB comes with a powerful inference engine>>.
-
-TypeDB allows you to integrate application logic by defining rules for the native symbolic reasoning / rules engine.
-Rules are written using the same patterns as queries and resolved against the schema,
-combining the flexibility of polymorphism with the power of symbolic reasoning.
-
-By employing sequential and recursive triggering of rules,
-extremely complex logical behaviors can arise from rules that are individually very simple,
-mirroring the true semantic logic of complex data domains.
+//#todo Add links to further documentation
 
 [#_pera]
-=== Polymorphic data model
-
-TypeDB schemas implement the polymorphic entity-relation-attribute (PERA) model for data,
-an extension of https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model[Chen’s entity-relationship (ER) model].
+[discrete]
+=== Example
 
 Entities, relations, and attributes are all first-class citizens in a data model
 allowing for expressive modeling without normalization or reification.
-There are three root types: entity, relation, and attribute;
+There are three root types: `entity`, `relation`, and `attribute`;
 and they can be subtyped to create user-defined types.
 
-All data stored in a database must be instantiated from types defined in a schema of a database.
+All data stored in a database must be instantiated from types defined in the schema.
 
 .A simple PERA model example
 =====
-Before inserting or retrieving any data, you need to define a TypeDB database schema.
+Before inserting or retrieving any data, you need to define a TypeDB database
+xref:typeql::fundamentals.adoc#_schema[schema].
+//#todo Change the link to the Schema page
 A schema defined with a xref:typeql::schema/define-types.adoc[Define] query, for example:
 
 .Schema example
@@ -80,7 +69,10 @@ A schema defined with a xref:typeql::schema/define-types.adoc[Define] query, for
 ----
 define
 
-user sub entity,
+person sub entity,
+    owns name;
+
+user sub person,
     owns username,
     plays group-membership:member;
 
@@ -93,8 +85,8 @@ group-membership sub relation,
     relates group,
     relates member;
 
-username sub attribute, value string;
 name sub attribute, value string;
+username sub attribute, value string;
 date-added sub attribute, value datetime;
 ----
 
@@ -103,6 +95,8 @@ The following schema can be visualized as a graph with a TypeDB Studio (IDE):
 [caption=""]
 .Schema visualization (TypeDB Studio)
 image::intro-schema-example.png[Schema example,width = 50%, link=self]
+
+You can clearly see that all attributes visualized as ellipses, entities as rectangles, and relations as diamonds.
 
 To insert some sample data, use the following xref:typeql::data/insert.adoc[Insert] query:
 
@@ -138,16 +132,34 @@ get $un;
 The above query returns usernames of all users, that are members of the `admins` user-group.
 =====
 
+[#_type_system]
+== Extensible strong type system
+
+Under the hood of TypeDB’s data model lies a powerful type system that formalizes the PERA model.
+TypeDB’s <<_strong_type_system,strong type system>> makes database applications safe and robust.
+This includes the semantic validation of all queries,
+which avoids otherwise hard-to-spot inconsistencies in data insertions or query patterns.
+It also means that database schemas can be easily manipulated and extended "on the fly"
+without users needing to worry about existing queries breaking or data being orphaned.
+
+Since types can be <<_polymorphic_query_example,polymorphically queried>>,
+the results of queries automatically extend
+to include new valid types that are added to the schema after the query is written.
+This minimizes the need to maintain and update queries when the schema is extended,
+so long as the semantic intent of the query remains the same.
+
+See the <<_strong_type_system>> below.
+
 [#_strong_type_system]
+[discrete]
+=== Example
+
 TypeDB brings the benefits of strong typing in modern programming languages to the database, allowing developers
 to use abstraction, inheritance, and polymorphism when modeling and querying data.
 
 .Example of a type hierarchy
 =====
-The following example extends the previous one.
-It can be ran on the same database or on a new (empty) one.
-
-First, we need to define a new schema:
+Type hierarchy is defined in a schema, so let's define a new one in an empty database:
 
 .Schema
 [,typeql]
@@ -156,12 +168,12 @@ define
 
 user sub entity,
     owns username,
+    owns password-hash,
+    owns email,
     plays group-membership:member;
 
 person sub user,
-    owns full-name,
-    owns email,
-    owns password-hash;
+    owns name;
 
 bot sub user,
     owns security-token;
@@ -176,13 +188,16 @@ group-membership sub relation,
     relates member;
 
 username sub attribute, value string;
-full-name sub attribute, value string;
-name sub attribute, value string;
-email sub attribute, value string;
 password-hash sub attribute, value string;
+email sub attribute, value string;
+name sub attribute, value string;
 security-token sub attribute, value string;
 date-added sub attribute, value datetime;
 ----
+
+The above query defines a schema, where the `person` type subtypes `users`, while previous had it reversed.
+It can be explained by classification, as in previous example, we could classify a person as either a user or not.
+In this example, we want to classify users between a living person and a bot.
 
 See below a TypeDB Studio visualization of that schema:
 
@@ -190,14 +205,16 @@ See below a TypeDB Studio visualization of that schema:
 .Type hierarchy example schema graph visualization
 image::intro-hierarchy-schema.png[Type hierarchy,width = 50%, link=self]
 
+//#todo Add some queries with validation showcase
+
 For more information on how strong our type system is, see the xref:typeql::fundamentals.adoc#_types[Types] section on
 xref:typeql::fundamentals.adoc[Fundamentals page] in xref:typeql::overview.adoc[TypeQL documentation].
 =====
 
-
 We can use polymorphic queries and type hierarchy to our advantage
-by querying for supertypes to get all possible results, including its subtypes.
+by querying for supertypes to get all possible results, including subtypes.
 
+[#_polymorphic_query_example]
 .Example of a polymorphic query
 =====
 Consider the following schema.
@@ -209,14 +226,14 @@ It differs from the previous one, so it should be applied to a new (empty) datab
 define
 
 person sub entity,
-    owns full-name;
+    owns name;
 
 user sub person,
     owns email @unique;
 
 admin sub user;
 
-full-name sub attribute, value string;
+name sub attribute, value string;
 email sub attribute, value string;
 ----
 
@@ -228,10 +245,10 @@ xref:typeql::data/insert.adoc[Insert] query:
 ----
 insert
     $u isa user,
-        has full-name "Boris Monson",
+        has name "Boris Monson",
         has email "boris@vaticle.com";
     $p isa person,
-        has full-name "Peter Griffel";
+        has name "Peter Griffel";
 ----
 
 Now let's xref:typeql::data/get.adoc[Get] all instances of the supertype `person`:
@@ -251,18 +268,126 @@ image::intro-get.png[poly,width = 50%, link=self]
 Both supertype and subtype instances are retrieved, while the Get query mentioned only supertype.
 =====
 
-[#_declarative]
-=== Fully declarative query language
+[#_typeql]
+== Expressive fully declarative query language
 
-TypeQL is designed specifically for expressing what data looks like, not how to get it.
+TypeDB features the type-theoretic query language, TypeQL,
+//#todo Add link to TypeQL Reference?
+which simultaneously serves as a
+https://en.wikipedia.org/wiki/Data_definition_language[Data Definition Language,window=_blank] and a
+https://en.wikipedia.org/wiki/Data_manipulation_language[Data Manipulation Language,window=_blank]
+for TypeDB queries.
+TypeQL is a near-natural and fully declarative database query language comprising composable patterns, allowing the user
+to create queries without the need to consider execution strategy -- all optimizations are handled directly by TypeDB.
+The pattern-based syntax of TypeQL is intuitive and flexible, mirroring natural language statements,
+and allowing for all parts of patterns to be variabilized.
+
+<<_declarative,TypeQL>> is designed specifically for expressing what data looks like, not how to get it.
 There are no joins, no unions, and no need for ordered query logic.
+TypeQL can natively model and implement all forms of type polymorphism,
+including type inheritance, type interfaces, and even parametric query patterns.
+With these capabilities,
+TypeQL solves the problem of object-relational mismatch
+and ensures interoperability with many modern programming languages and complex object-oriented features.
+It enables engineers to work with flexible, extendable, and adaptable data models,
+making it easier to manage, query, and reason over complex data structures.
+
+See the <<_declarative>> below.
+
+[#_declarative]
+[discrete]
+=== Example
+//=== Fully declarative query language
 
 Data queries are based on powerful yet simple patterns, using types defined in a schema of a database.
 Those patterns are easily readable and composable!
 We can add new statements to any place in a pattern, and we can even combine multiple patterns,
 to retrieve all matching data in just one query.
 
-.Examples
+.Data definition example
+=====
+Let's start by defining a simple schema in an empty database:
+
+.Simple schema
+[,typeql]
+----
+define
+
+person sub entity,
+    owns name;
+
+user sub person,
+    owns email;
+
+name sub attribute, value string;
+email sub attribute, value string;
+----
+
+The above query defines two entities and two attributes.
+
+Let's add some more type definitions and send the following
+xref:typeql::schema/define-types.adoc[Define] query to the same database:
+
+.Intermediate schema
+[,typeql]
+----
+define
+
+user owns email @unique,
+    owns username,
+    owns password-hash;
+
+user-group sub entity,
+    owns name;
+
+username sub attribute, value string;
+password-hash sub attribute, value string;
+----
+
+We added two more attribute types to the schema and ownership of them to an existing type.
+We also added a new entity, owning an existing attribute type.
+
+Now let's extend our schema again and add some relation to the schema of the same database,
+but this time we will send the final schema entirely,
+repeating the parts, that are already in the schema of the database.
+To do this, send the following Define query:
+
+.Full schema
+[,typeql]
+----
+define
+
+person sub entity,
+    owns name;
+
+user sub person,
+    owns email @unique,
+    owns username,
+    owns password-hash,
+    plays group-membership:member;
+
+user-group sub entity,
+    owns name,
+    plays group-membership:group;
+
+group-membership sub relation,
+    owns date-added,
+    relates group,
+    relates member;
+
+username sub attribute, value string;
+name sub attribute, value string;
+email sub attribute, value string;
+password-hash sub attribute, value string;
+date-added sub attribute, value datetime;
+----
+
+By sending the Define query to the database, we extended the schema of the database without causing any problems,
+because statements in a Define query are idempotent.
+//#todo Add a link to idempotency explanation
+=====
+
+.Data manipulation example
 =====
 The following Insert query creates two instances of the `person` type, and two groups and assigns a membership in one
 of the groups for one of the users:
@@ -271,14 +396,14 @@ of the groups for one of the users:
 [,typeql]
 ----
 insert
-$p1 isa person,
-    has full-name "Bob",
-    has name "bob90",
+$u1 isa user,
+    has name "Bob",
+    has username "bob90",
     has email "bob@vaticle.com";
 
-$p2 isa person,
-    has full-name "Alex",
-    has name "al-capucino";
+$u2 isa user,
+    has name "Alex",
+    has username "al-capucino";
 
 $g1 isa user-group,
     has name "admins";
@@ -286,25 +411,34 @@ $g1 isa user-group,
 $g2 isa user-group,
     has name "users";
 
-$m (member: $p1, group: $g1) isa group-membership;
+$m (member: $u1, group: $g1) isa group-membership;
 ----
 
-The following query retrieves data of all instances of `user` type (which is a supertype for the `person` type) that
-have ownership over any attribute.
-It returns all matched instances of `user` type or its subtypes and the attributes they own.
+To get back the inserted name and email for the user with username `bob90`, use the following query:
 
-.Get query
+.Simple Get query
 [,typeql]
 ----
 match
-$u isa user, has $a;
+    $p isa person,
+        has name $n,
+        has username "bob90",
+        has email $e;
+get $n, $e;
 ----
 
-The following query executes `match` clause first and then `insert` clause using matched data.
-The `match` clause matches all instances of `person` type and all instances of `user-group` type, owning an attribute of
-type `name` and value `users` such as there is no `group-membership` relation between them.
-Then the `insert` clause inserts a `group-membership` relation between all matched instances of `person`
-and all matched instances of `group`:
+Now let's query for all users and their owned attributes:
+
+.Another simple Get query
+[,typeql]
+----
+match $u isa user, has $a;
+----
+
+It should return pairs of `$u` and `$a`, where `$u` is an instance of the `user` type (and its subtypes)
+that has attribute `$a` of any attribute type.
+
+Now let's do match-insert to showcase the insertion of data with the context from the database:
 
 .Insert query with a match clause
 [,typeql]
@@ -317,10 +451,38 @@ not { ($p, $g) isa group-membership; };
 insert
 (member:$p, group:$g) isa group-membership;
 ----
+
+The above query executes `match` clause first and then `insert` clause using matched data.
+The `match` clause matches all instances of `person` type and all instances of `user-group` type, owning an attribute of
+type `name` and value `users` such as there is no `group-membership` relation between them.
+Then the `insert` clause inserts a `group-membership` relation between all matched instances of `person`
+and all matched instances of `group`.
 =====
 
+[#_inference_engine]
+== Powerful explainable inference engine
+
+TypeDB allows you to integrate your application logic directly into the database,
+by providing a type-theoretic symbolic reasoning engine that evaluates user-specified rules.
+Rules are written using the same patterns as queries and resolved against the schema,
+combining the flexibility of polymorphism with the power of symbolic reasoning.
+By employing sequential and recursive triggering of rules,
+highly complex logical behaviors can arise from rules that are individually very simple,
+mirroring the true semantic logic of complex data domains.
+
+When utilizing symbolic <<_infer,reasoning>>, new fact generation occurs at query time,
+ensuring that generated data is never stale.
+By using rules to govern data dependencies within the database,
+all inferred data can be made to have a single source of truth,
+preventing data conflicts from ever occurring.
+This ensures that the database is always in a consistent and current state,
+preventing the need for pre-computation cycles.
+
+See the <<_infer>> below.
+
 [#_infer]
-=== Inference engine
+[discrete]
+=== Example
 
 Inference in TypeDB can be either rule-based or type-based.
 
@@ -343,11 +505,11 @@ rule everyone-is-a-dude:
     when {
         $p isa person;
     } then {
-        $p has full-name "Dude";
+        $p has name "Dude";
     };
 ----
 
-The above example will add a `full-name` attribute with value `Dude` to every existing person.
+The above example will add a `name` attribute with value `Dude` to every existing person.
 
 Let’s add to the above schema an ability for user-groups to be members of other user-groups.
 =====
