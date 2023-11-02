@@ -1,0 +1,62 @@
+// tag::install-homebrew[]
+To install TypeDB via `brew`:
+
+[,bash]
+----
+brew install typedb
+----
+
+For `arm64` architecture (e.g., a MacBook with `M1` processor),
+we don't recommend installing TypeDB versions prior to `2.19.0` via Homebrew; see the
+https://forum.vaticle.com/t/running-typedb-on-an-m1-macbook/[Running TypeDB on an M1 MacBook,window=_blank] and
+use the <<_manual,manual>> installation instead.
+
+// end::install-homebrew[]
+
+// tag::manual-install[]
+. Ensure Java 11+ is installed.
+TypeDB supports https://jdk.java.net[OpenJDK,window=_blank] and
+https://www.oracle.com/java/technologies/downloads/[Oracle JDK,window=_blank].
++
+To check the Java SDK version:
++
+[,bash]
+----
+/usr/libexec/java_home -V
+----
++
+TypeDB runs natively on both `arm64` and `x86_64` architectures.
+For the best performance, make sure both TypeDB and Java SDK match your native architecture and are not using
+https://en.wikipedia.org/wiki/Rosetta_(software)[Rosetta].
+
+. Extract the archive with TypeDB into a new directory:
++
+[,bash,subs=attributes+]
+----
+sudo mkdir /opt/typedb
+unzip ~/Downloads/typedb-all-mac-{latest-version}.zip -d /opt/typedb
+----
+
+. Add a symlink to the TypeDB executable in the `/usr/local/bin` directory:
++
+[,bash,subs=attributes+]
+----
+ln -s /opt/typedb/typedb-all-mac-{latest-version}/typedb /usr/local/bin/typedb
+----
+
+// end::manual-install[]
+
+// tag::start[]
+
+[,bash]
+----
+typedb server
+----
+
+// end::start[]
+
+// tag::stop[]
+
+Close the terminal or press kbd:[Ctrl+C].
+
+// end::stop[]

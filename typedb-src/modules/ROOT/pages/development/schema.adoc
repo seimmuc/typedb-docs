@@ -84,7 +84,7 @@ If we try to run this example in an empty database it will throw an error, becau
 types we mentioned as owned by the `file` entity type actually need to exist in the schema.
 
 They can be defined in the schema prior to our query (e.g., if we run this query on the database from the
-xref:quickstart-guide.adoc[Quickstart] page), or we can define them in the same query. To do that, use the following query
+xref:home::quickstart.adoc[Quickstart] page), or we can define them in the same query. To do that, use the following query
 instead:
 
 [,typeql]
@@ -214,7 +214,7 @@ The condition definition goes inside the `when` clause.
 
 The conclusion definition goes inside the `then` clause.
 
-For more information about rules see the xref:typeql::schema/define-rules.adoc[,window=_blank] page.
+For more information about rules, see the xref:typeql::schema/define-rules.adoc[] page.
 
 [#_undefine]
 == Undefine

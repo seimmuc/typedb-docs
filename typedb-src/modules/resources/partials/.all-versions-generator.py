@@ -129,24 +129,24 @@ def generate_table_contents(versions, hash=False, tags=False):
     result = ""
     for version in versions:
         result += '\n| ' + version["release_notes"] + '[' + version["version"] + ']' + '\n'
-        result += 'a|[,bash]' + '\n'
-        result += '----' + '\n'
-        result += 'docker pull vaticle/typedb:' + version["version"] + '\n'
-        result += '----' + '\n'
+        # result += 'a|[,bash]' + '\n'
+        # result += '----' + '\n'
+        # result += 'docker pull vaticle/typedb:' + version["version"] + '\n'
+        # result += '----' + '\n'
 
-        for os in ["win", "lin", "mac"]:
+        for os in ["mac", "lin", "win"]:
             result += '|'
             if tags:
                 result += '\n' + '// tag::' + os + '[]' + '\n'
             else:
                 result += ' '
             if version[os]["url"] != "":
-                result += version[os]["url"] + '[Download]' + '\n'
+                result += version[os]["url"] + '[x86_64]' + '\n'
             else:
                 if version[os]["url-x86"] != "":
-                    result += 'Download ' + version[os]["url-x86"] + '[x86-64] /'
+                    result += version[os]["url-x86"] + '[x86_64] /'
                 if version[os]["url-arm"] != "":
-                    result += ' ' + version[os]["url-arm"] + '[ARM]' + '\n'
+                    result += ' ' + version[os]["url-arm"] + '[arm64]' + '\n'
 
             if tags:
                 result += '// end::' + os + '[]' + '\n'
@@ -181,4 +181,3 @@ print("\nFile", filename_all, "write complete!")
 latest_downloads = generate_table_contents([versions[0]], tags=True)
 write_file(filename_latest, latest_downloads)
 print("\nFile", filename_latest, "write complete!")
-

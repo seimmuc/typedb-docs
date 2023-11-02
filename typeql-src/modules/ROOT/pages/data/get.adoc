@@ -4,11 +4,10 @@
 :longTailKeywords: typeql get, match get, typeql read, typedb read
 :pageTitle: Get query
 
-A get query retrieves data from a TypeDB database.
+A get query retrieves concepts from a TypeDB database that you can further process with the Driver API.
 
-It is the only type of query to be used in a read transaction.
-Hence, it’s the only query type that can use xref:typeql::schema/define-rules.adoc[rules]-based
-xref:typedb::fundamentals/inference.adoc[inference,window=_blank].
+It should be used in read transactions,
+and it can be used with rule-based xref:typedb::fundamentals/inference.adoc[inference].
 
 A Get query triggers a search in a database based on the xref:typeql::data/basic-patterns.adoc[pattern] in the
 `match` clause. It retrieves concepts and values from a database. The result of a get query can vary depending on the
@@ -38,11 +37,9 @@ match <pattern>
 [count;] [sum|max|min|mean|median|std <variable>;]
 ----
 
-[NOTE]
-====
-A pattern consists of variables and constraints for concepts. For more information, see the
+For more information on `match` clause patterns, see the
 xref:data/basic-patterns.adoc#_patterns_overview[Pattern syntax] section.
-====
+//#todo update the link after introducing the Match clause page
 
 [IMPORTANT]
 ====
@@ -196,7 +193,7 @@ attribute.
 .See how to load such a dataset in a database
 [%collapsible]
 ====
-To insert this dataset with anything xref:clients::clients.adoc[other] than xref:clients::studio.adoc[TypeDB Studio] --
+To insert this dataset with anything xref:clients::overview.adoc[other] than xref:clients::studio.adoc[TypeDB Studio] --
 make sure to send every line, except from comments, as a separate insert query. In TypeDB Studio we can just paste the
 TypeQL in the text editor and send all the queries by a single run button click in a data/write mode. Make sure to
 commit the changes in any client.
@@ -340,7 +337,7 @@ attribute of the `action` entity in those `access` relations. The results are th
 ascending order, limited by only the first three results, and grouped by `path` variable values.
 
 The following or similar result can be obtained by running the query above without inference on the TypeDB server with
-the IAM schema and dataset from the xref:typedb:ROOT:quickstart-guide.adoc[Quickstart guide].
+the IAM schema and dataset from the xref:home::quickstart.adoc[Quickstart guide].
 
 [,typeql]
 ----
