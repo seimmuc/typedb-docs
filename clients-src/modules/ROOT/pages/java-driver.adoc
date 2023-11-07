@@ -20,7 +20,7 @@ Add the code below to the `pom.xml` file in the Maven project.
 
 [IMPORTANT]
 ====
-Be sure to replace the `\{version}` placeholder tag with the version of Client Java we want to install.
+Be sure to replace the `\{version}` placeholder tag with the version of Driver Java we want to install.
 ====
 
 [,xml]
@@ -116,6 +116,11 @@ Learn to use native Java syntax to build TypeQL queries with xref:java-driver/qu
 [cols="^.^2,^.^1,^.^2,^.^2"]
 |===
 | Java Driver | Protocol encoding version | TypeDB Core | TypeDB Cloud & TypeDB Enterprise
+
+| 2.25.2
+| 3
+| 2.25.0
+| 2.25.0
 
 | 2.24.15
 | 2
