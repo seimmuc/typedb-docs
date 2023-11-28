@@ -31,14 +31,16 @@ There are the following types of clauses:
 * `define`
 * `undefine`
 * `match`
+* `fetch`
 * `get`
 * `insert`
 * `delete`
 
-A clause contains a single pattern, or a list of variables:
+All clauses start with the keyword, the same as the clause's name, followed by:
 
-- The `get` clause starts with the `get` keyword, followed by a list of variables and optional modifiers at the end.
-- All other TypeQL clauses consist of the defining keyword (the same as the clause's name) and a pattern.
+* A list of variables and optional modifiers at the end (for a `get` clause);
+* A list of variables or subqueries (for a `fetch` clause);
+* A TypeQL pattern (for all other clauses).
 
 A pattern consists of one or more statements.
 
@@ -846,7 +848,7 @@ With the `get` clause, we filter the results to get the `person` instances and t
 in a database.
 
 For more information why the `get` clause in the above example needs `$p` see the
-xref:typeql:ROOT:data/get.adoc#_number_of_answers[Get query] page or the
+xref:typeql:ROOT:data/get.adoc#_number_of_results[Get query] page or the
 xref:typeql:ROOT:data/get.adoc#_explanation_of_filter[example explanation].
 
 == Formatting

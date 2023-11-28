@@ -9,11 +9,11 @@
 [#_how_to_use_inference]
 == How to use inference
 
-Inference is enabled as a Read xref:development/connect.adoc#_transactions[transaction] option.
+Inference is enabled as a Read xref:connecting/overview.adoc#_transactions[transaction] option.
 
 === TypeDB Studio
 
-To send a request with inference enabled in xref:clients::studio.adoc[TypeDB Studio] follow these steps:
+To send a request with inference enabled in xref:connecting/studio.adoc[TypeDB Studio] follow these steps:
 
 . Ensure the btn:[Session type] (`schema` / `data`) switch is set to `data` (next to the database dropdown).
 . Ensure the btn:[Transaction type] (write / read) switch is set to `read`.
@@ -91,7 +91,7 @@ access with `view_file` action).
 
 === Query explanation
 
-The example is a `get` query with `match` clause and optional `get` clause that does the following:
+The example is a `get` query that does the following:
 
 . Finds `person` entity (`$p`) with an attribute `full-name` equal to the `Kevin Morrison` string value.
 . Finds all `object` entities (`$o`) with a `path` attribute (`$o-path`).

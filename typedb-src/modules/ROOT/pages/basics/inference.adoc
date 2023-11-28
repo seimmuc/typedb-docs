@@ -47,7 +47,7 @@ include::typeql::fundamentals.adoc[tag=recursive_logic]
 Read more on how to create rules in a schema in the xref:typedb::development/schema.adoc#_define_rules[Define rules]
 section of the xref:typedb::development/schema.adoc[] page.
 
-We can use xref:typedb::fundamentals/patterns.adoc#_computation[computation] operations and functions in the condition pattern.
+We can use xref:typedb::basics/patterns.adoc#_computation[computation] operations and functions in the condition pattern.
 And we can use value variables in the conclusion of a rule.
 
 [#_rule_validation]
@@ -61,7 +61,7 @@ This was the last page of the *Fundamentals* section.
 
 We recommend continuing exploration of TypeDB by going through the *Developing with TypeDB* section:
 
-* xref:development/connect.adoc[]
+* xref:connecting/overview.adoc[]
 * xref:development/schema.adoc[]
 * xref:development/write.adoc[]
 * xref:development/read.adoc[]
