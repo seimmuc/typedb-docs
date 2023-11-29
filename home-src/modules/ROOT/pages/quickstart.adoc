@@ -48,17 +48,17 @@ Click btn:[Connect to TypeDB] on the right side of the top toolbar.
 Cloud::
 +
 --
-image::studio-cloud-connect.png[TypeDB Studio connect window, width = 75%, link=self]
+image::studio-connect-cloud.png[TypeDB Studio connect window, width = 75%, link=self]
 
 . Switch the `Server` field drop-down to `TypeDB Enterprise`.
 . Click btn:[Manage Enterprise Addresses] button and add all servers (address and port)
 from your TypeDB Cloud deployment.
 Close the Address management window.
 . Fill in the `Username` (default: `admin`) and `Password` (default: `password`) fields.
-. Turn on the `Enable TLS` option and select a TypeDB Cloud certificate in the `CA Certificate` field.
+. Turn on the `Enable TLS` option and leave the `CA Certificate` field empty.
 . Click `Connect`.
 
-[WARNING]
+[IMPORTANT]
 =====
 Don't forget to change the default username and password.
 You can use xref:typedb:ROOT:connecting/console.adoc#_change_password[TypeDB Console] to do that.
@@ -68,17 +68,17 @@ You can use xref:typedb:ROOT:connecting/console.adoc#_change_password[TypeDB Con
 Enterprise::
 +
 --
-image::studio-enterprise-connect.png[TypeDB Studio connect window, width = 75%, link=self]
+image::studio-connect-enterprise.png[TypeDB Studio connect window, width = 75%, link=self]
 
 . Switch the `Server` field drop-down to `TypeDB Enterprise`.
 . Click btn:[Manage Enterprise Addresses] button and add all servers (address and port)
 from your TypeDB Cloud deployment.
 Close the Address management window.
 . Fill in the `Username` (default: `admin`) and `Password` (default: `password`) fields.
-. Turn on the `Enable TLS` option and select a CA certificate for your on-premise cluster in the `CA Certificate` field.
+. Turn on the `Enable TLS` option and select the CA certificate for your on-premise cluster in the `CA Certificate` field.
 . Click `Connect`.
 
-[WARNING]
+[IMPORTANT]
 =====
 Don't forget to change the default username and password.
 You can use xref:typedb:ROOT:connecting/console.adoc#_change_password[TypeDB Console] to do that.
@@ -88,7 +88,7 @@ You can use xref:typedb:ROOT:connecting/console.adoc#_change_password[TypeDB Con
 Core::
 +
 --
-image::studio-connect.png[TypeDB Studio connect window, width = 75%, link=self]
+image::studio-connect-core.png[TypeDB Studio connect window, width = 75%, link=self]
 
 Enter TypeDB Core server address (e.g., `localhost:1729`) and click btn:[Connect].
 --
@@ -99,17 +99,15 @@ Enter TypeDB Core server address (e.g., `localhost:1729`) and click btn:[Connect
 Select a xref:typedb:ROOT:connecting/studio.adoc#_open_a_project_directory[project directory]
 to store project files by clicking either:
 
-* btn:[Open Project] in the *Project* panel (upper left); or
-* Folder icon (the first icon on the top toolbar).
+* btn:[Open Project] in the *Project* panel; or
+* Folder icon (image:home::studio-icons/project.png[]) in the top toolbar.
 
 [#_create_a_database]
 == Create a new database
 
 Create a database to play with:
 
-. Click the database icon (the third button in the top toolbar).
-+
-image::studio-database.png[Database Manager button,width = 50%,link=self]
+. Click the database icon (image:home::studio-icons/database.png[]) in the top toolbar.
 . Enter `try-studio` and click btn:[Create].
 . Select `try-studio` from the database dropdown (to the right of the database icon).
 
@@ -118,16 +116,16 @@ image::studio-database.png[Database Manager button,width = 50%,link=self]
 
 A new database needs a schema before we can load any data:
 
+. Ensure the Session toggle (`schema` / `data`) is set to `schema` and
+  the Transaction toggle (`write` / `read`) is set to `write`.
 . Open a new tab and copy-paste the following Define query:
 +
 [,typeql]
 ----
 include::attachment$quickstart-schema.tql[]
 ----
-. Ensure the Session toggle (`schema` / `data`) is set to `schema` and
-  the Transaction toggle (`write` / `read`) is set to `write`.
-. Click btn:[Run Query].
-. When the query has completed, click btn:[Commit Transaction].
+. Click btn:[Run Query] (image:home::studio-icons/run.png[]).
+. When the query has completed, click btn:[Commit Transaction] (image:home::studio-icons/commit.png[]).
 
 Now that the schema has been defined, data can be inserted into the database.
 
@@ -135,15 +133,15 @@ Now that the schema has been defined, data can be inserted into the database.
 
 Now let's insert some sample data into the newly created database to be able to query in future steps:
 
+. Ensure the Session toggle is set to `data` and the Transaction toggle is set to `write`.
 . Open a new tab and copy-paste the following Insert queries:
 +
 [,typeql]
 ----
 include::attachment$quickstart-data.tql[]
 ----
-. Ensure the Session toggle is set to `data` and the Transaction toggle is set to `write`.
-. Execute all queries in the file by clicking btn:[Run Query].
-. When the queries have completed, click btn:[Commit Transaction].
+. Execute all queries in the file by clicking btn:[Run Query] (image:home::studio-icons/run.png[]).
+. When the queries have completed, click btn:[Commit Transaction] (image:home::studio-icons/commit.png[]).
 
 Assuming there were no errors in the process, the data is persisted in the database.
 
@@ -212,8 +210,7 @@ To xref:typeql::data/get.adoc[get] all instances of a `person` type with all att
 [,typeql]
 ----
 match
-$p isa person,
-    has $a;
+$p isa person, has $a;
 get $p, $a;
 ----
 
@@ -232,8 +229,7 @@ owned by every person with a full name that contains substring `Kevin`:
 [,typeql]
 ----
 match
-$p isa person,
-    has full-name $fn;
+$p isa person, has full-name $fn;
 $fn contains "Kevin";
 fetch $p as person: email as "E-mail address";
 ----
@@ -261,8 +257,7 @@ that contains "Kevin":
 [,typeql]
 ----
 match
-$p isa person,
-    has full-name $fn;
+$p isa person, has full-name $fn;
 $fn contains "Kevin";
 insert $p has email "kevin@gmail.com";
 ----
@@ -283,8 +278,10 @@ $p isa person,
     has email $e;
 $fn contains "Kevin";
 $e = "kevin@gmail.com";
-delete $p has $e;
-insert $p has email "kevin2@gmail.com";
+delete
+$p has $e;
+insert
+$p has email "kevin2@gmail.com";
 ----
 
 The query above does the following:
@@ -307,13 +304,14 @@ $p isa person,
     has email $e;
 $fn contains "Kevin";
 $e = "kevin2@gmail.com";
-delete $p has $e;
+delete
+$p has $e;
 ----
 
 == Repeat with TypeDB Console
 
 xref:typedb:ROOT:connecting/console.adoc[TypeDB Console] is usually distributed with TypeDB.
-You can find it with the TypeDB installed or xref:home::install.adoc#_console[install] it separately.
+You can find it with the TypeDB or xref:home::install.adoc#_console[install] it separately.
 
 [#_console_run]
 === Run TypeDB Console
