@@ -26,10 +26,11 @@ xref:drivers::java/api-reference.adoc#_UserManager[Java],
 xref:drivers::nodejs/api-reference.adoc#_UserManager[Node.js] API Reference pages.
 
 [#_first_login]
-== First login
+== Change password on first login
 
 The First thing you need to do is to change the default admin password:
 
+[caption="step"]
 1. Connect with TypeDB Console (see above).
 Use the default credentials to do so:
 +
