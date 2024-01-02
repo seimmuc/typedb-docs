@@ -74,12 +74,10 @@ A `match` clause is mandatory in a Fetch query.
 You can use a declarative and composable TypeQL pattern in a `match` clause and TypeDB will find data that matches
 the pattern.
 
-For more information on a `match` clause, see the
-//#todo update the link after introducing the Match clause page!
-xref:typeql::queries.adoc#_match[Match clause] description on the Queries page.
+For more information on a `match` clause, see the xref:data/match.adoc[] page.
 
 For more information on patterns used in a `match` clause, see the
-xref:data/match.adoc#_patterns_overview[Pattern syntax] section.
+xref:data/match.adoc#_patterns_overview[Patterns overview] section.
 
 [#_fetch_clause]
 == Fetch clause
@@ -461,7 +459,7 @@ fetch $fp;
 Using the
 https://github.com/vaticle/typedb-docs/blob/master/typedb-src/modules/ROOT/attachments/iam-data.tql[IAM sample data,window=_blank]
 the above query shows any results only if inference is
-xref:typedb::development/infer.adoc#_how_to_use_inference[enabled].
+xref:typedb::developing/infer.adoc#_how_to_use_inference[enabled].
 
 .Result example with inference enabled
 [,js]

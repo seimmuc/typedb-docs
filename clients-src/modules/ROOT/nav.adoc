@@ -1,3 +1,0 @@
-// Clients
-
-include::home::partial$nav-full.adoc[]

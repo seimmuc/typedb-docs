@@ -7,12 +7,12 @@
 :!example-caption:
 
 TypeDB accepts client connections via gRPC based
-https://github.com/vaticle/typedb-protocol[TypeDB Driver RPC,window=_blank] protocol.
+https://github.com/vaticle/typedb-protocol[TypeDB driver RPC,window=_blank] protocol.
 
-A library that implements this protocol and provides a native API to access TypeDB is called a TypeDB Driver.
+A library that implements this protocol and provides a native API to access TypeDB is called a TypeDB driver.
 
 A TypeDB Client is any software that can connect to a TypeDB,
-including TypeDB Drivers and standalone software applications that use TypeDB Drivers.
+including TypeDB drivers and standalone software applications that use TypeDB drivers.
 
 [#_clients]
 == Clients
@@ -21,7 +21,7 @@ There are multiple open-source TypeDB Clients that you can use to connect to Typ
 
 * xref:typedb::connecting/studio.adoc[] -- a GUI-based IDE for TypeDB;
 * xref:typedb::connecting/console.adoc[] -- the default CLI tool for TypeDB;
-* xref:drivers::overview.adoc[TypeDB Drivers] for the most popular programming languages:
+* xref:drivers::overview.adoc[TypeDB drivers] for the most popular programming languages:
 xref:drivers::rust/overview.adoc[Rust],
 xref:drivers::python/overview.adoc[Python],
 xref:drivers::java/overview.adoc[Java],
@@ -39,14 +39,20 @@ TypeDB Console::
 .Connect to TypeDB Core
 [,bash]
 ----
-typedb console --server=127.0.0.1:1729
+typedb console
 ----
 
-.Connect to TypeDB Cloud / Enterprise
+By default, TypeDB Console connects to your local TypeDB Core installation with the `localhost:1729` address.
+To connect to a different address use the `--core` argument followed by a TypeDB server IP address and port,
+for example, `typedb console --core=10.1.2.3:1729`.
+
+.Connect to TypeDB Cloud
 [,bash]
 ----
-typedb console --enterprise=127.0.0.1:1729 --username=admin --password --tls-enabled=true
+typedb console --cloud=10.1.2.3:1729 --username=admin --password --tls-enabled=true
 ----
+Use `--cloud` argument to select address and port to connect to a TypeDB Cloud cluster.
+
 For more information on CLI commands, see the xref:typedb::connecting/console.adoc[] page.
 --
 
@@ -59,10 +65,10 @@ Rust::
 let driver = Connection::new_core("127.0.0.1:1729");
 ----
 
-.Connect to TypeDB Cloud / Enterprise
+.Connect to TypeDB Cloud
 [,rust]
 ----
-let driver = Connection::new_enterprise(&["127.0.0.1:1729"], Credential::with_tls("admin", "password", None).unwrap());
+let driver = Connection::new_cloud(&["127.0.0.1:1729"], Credential::with_tls("admin", "password", None).unwrap());
 ----
 For a more comprehensive code example, see the xref:typedb::tutorials/sample-app.adoc[] page.
 --
@@ -76,10 +82,10 @@ Python::
 driver = TypeDB.core_driver("127.0.0.1:1729")
 ----
 
-.Connect to TypeDB Cloud / Enterprise
+.Connect to TypeDB Cloud
 [,python]
 ----
-driver = TypeDB.enterprise_driver("127.0.0.1:1729", TypeDBCredential("admin", "password", tls_enabled=True))
+driver = TypeDB.cloud_driver("127.0.0.1:1729", TypeDBCredential("admin", "password", tls_enabled=True))
 ----
 For a more comprehensive code example, see the xref:typedb::tutorials/sample-app.adoc[] page.
 --
@@ -93,10 +99,10 @@ Java::
 TypeDBDriver driver = TypeDB.coreDriver("127.0.0.1:1729");
 ----
 
-.Connect to TypeDB Cloud / Enterprise
+.Connect to TypeDB Cloud
 [,java]
 ----
-TypeDBDriver driver = TypeDB.enterpriseDriver("127.0.0.1:1729", new TypeDBCredential("admin", "password", true ));
+TypeDBDriver driver = TypeDB.cloudDriver("127.0.0.1:1729", new TypeDBCredential("admin", "password", true ));
 ----
 For a more comprehensive code example, see the xref:typedb::tutorials/sample-app.adoc[] page.
 --
@@ -110,10 +116,10 @@ Node.js::
 const driver = await TypeDB.coreDriver("127.0.0.1:1729");
 ----
 
-.Connect to TypeDB Cloud / Enterprise
+.Connect to TypeDB Cloud
 [,js]
 ----
-const driver = await TypeDB.enterpriseDriver("127.0.0.1:1729", new TypeDBCredential("admin","password"));
+const driver = await TypeDB.cloudDriver("127.0.0.1:1729", new TypeDBCredential("admin","password"));
 ----
 --
 For a more comprehensive code example, see the xref:typedb::tutorials/sample-app.adoc[] page.
@@ -132,7 +138,7 @@ This is to prevent any potential errors from using incompatible versions of Type
 
 See the compatibility tables for protocol encoding versions of:
 xref:typedb::connecting/studio.adoc#_version_compatibility[TypeDB Studio],
-xref:typedb::connecting/console.adoc#_version_compatibility[TypeDB Console], and TypeDB Drivers:
+xref:typedb::connecting/console.adoc#_version_compatibility[TypeDB Console], and TypeDB drivers:
 xref:drivers::rust/overview.adoc#_version_compatibility[Rust],
 xref:drivers::python/overview.adoc#_version_compatibility[Python],
 xref:drivers::java/overview.adoc#_version_compatibility[Java],
@@ -142,7 +148,7 @@ xref:drivers::nodejs/overview.adoc#_version_compatibility[Node.js].
 == Databases
 
 TypeDB servers store data in databases.
-A database consists of a xref:development/schema.adoc[schema] and xref:development/write.adoc[data].
+A database consists of a xref:developing/defining-schema.adoc[schema] and xref:developing/write.adoc[data].
 Databases are isolated: two databases can't influence each other.
 However, a TypeDB Client can connect to multiple databases simultaneously.
 
@@ -346,7 +352,7 @@ For more information on how to do it with different TypeDB Clients, see the docu
 
 * xref:connecting/studio.adoc#_transaction_control[TypeDB Studio]
 * xref:connecting/console.adoc#_database_management_commands[TypeDB Console]
-* TypeDB Drivers:
+* TypeDB drivers:
 ** xref:drivers:ROOT:rust/api-reference.adoc#_session_header[Rust],
 ** xref:drivers:ROOT:python/api-reference.adoc#_session_header[Python],
 ** xref:drivers:ROOT:java/api-reference.adoc#_session_header[Java],
@@ -455,7 +461,7 @@ For more information on how to do it with different Clients, see the documentati
 
 * xref:connecting/studio.adoc#_transaction_control[TypeDB Studio]
 * xref:connecting/console.adoc#_transaction_querying_commands[TypeDB Console]
-* TypeDB Drivers:
+* TypeDB drivers:
 ** xref:drivers:ROOT:rust/api-reference.adoc#_transaction_header[Rust],
 ** xref:drivers:ROOT:python/api-reference.adoc#_transaction_header[Python],
 ** xref:drivers:ROOT:java/api-reference.adoc#_transaction_header[Java],
@@ -479,12 +485,12 @@ caused by transactions that will not be completed and terminate unresponsive tra
 * Avoid long-running transactions which can result in conflicts and resource contention.
 * Transactions should group logically coherent queries.
 
-For more advice and *best practices*, visit the xref:development/best.adoc[Best practices] page.
+For more advice and *best practices*, visit the xref:developing/best.adoc[Best practices] page.
 
 == Learn more
 
 Learn how to develop an application with TypeDB:
 
-* xref:typedb::development/schema.adoc[]
-* xref:typedb::development/write.adoc[]
-* xref:typedb::development/read.adoc[]
+* xref:typedb::developing/defining-schema.adoc[]
+* xref:typedb::developing/write.adoc[]
+* xref:typedb::developing/read.adoc[]
