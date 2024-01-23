@@ -121,8 +121,8 @@ const driver = await TypeDB.coreDriver("127.0.0.1:1729");
 ----
 const driver = await TypeDB.cloudDriver("127.0.0.1:1729", new TypeDBCredential("admin","password"));
 ----
---
 For a more comprehensive code example, see the xref:typedb::tutorials/sample-app.adoc[] page.
+--
 ====
 
 To send a query, TypeDB Client must connect to TypeDB, open a session, and open a transaction first.
